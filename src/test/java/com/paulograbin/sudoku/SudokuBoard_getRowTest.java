@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
 
 public class SudokuBoard_getRowTest {
 
-    SudokuBoard board;
+    private SudokuBoard board;
+    private final List<Integer> POSSIBILITIES = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -46,7 +47,7 @@ public class SudokuBoard_getRowTest {
         List<Integer> row = fetchIntegerFromIntArray(rowElements);
         System.out.println(row);
 
-        assertHasElements(row, 3, 5, 6, 4);
+        assertHasOnlyThisElements(row, 3, 5, 6, 4);
     }
 
     @Test
@@ -56,7 +57,7 @@ public class SudokuBoard_getRowTest {
         List<Integer> row = fetchIntegerFromIntArray(rowElements);
         System.out.println(row);
 
-        assertHasElements(row, 8, 4, 5, 1, 2);
+        assertHasOnlyThisElements(row, 8, 4, 5, 1, 2);
     }
 
     @Test
@@ -66,21 +67,30 @@ public class SudokuBoard_getRowTest {
         List<Integer> row = fetchIntegerFromIntArray(rowElements);
         System.out.println(row);
 
-        assertHasElements(row, 2, 4, 5, 6);
+        assertHasOnlyThisElements(row, 2, 4, 5, 6);
     }
 
-    private void assertHasElements(List<Integer> row, int ... args) {
+    private void assertHasOnlyThisElements(List<Integer> row, int ... args) {
+        List<Integer> localPossibilities = new ArrayList<>();
+        localPossibilities.addAll(POSSIBILITIES);
+
         for(int i : args) {
-            assertTrue(row.contains(new Integer(i)));
+            assertTrue(row.contains(i));
+            localPossibilities.remove(new Integer(i));
+
+        }
+
+        for(Integer i : localPossibilities) {
+            assertFalse(row.contains(i));
         }
     }
 
     private List<Integer> fetchIntegerFromIntArray(int[] rowElements) {
-        List<Integer> elements = new ArrayList<Integer>();
+        List<Integer> elements = new ArrayList<>();
 
         for(int i : rowElements) {
             if(i > 0)
-                elements.add(new Integer(i));
+                elements.add(i);
         }
 
         return elements;
