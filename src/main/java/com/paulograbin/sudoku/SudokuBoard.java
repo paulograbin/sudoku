@@ -16,7 +16,7 @@ public class SudokuBoard {
         int[] rowElements = new int[9];
 
         for(int i = 0; i < 9; i++)
-            rowElements[i] = board[0][i];
+            rowElements[i] = board[row][i];
 
         return rowElements;
     }
