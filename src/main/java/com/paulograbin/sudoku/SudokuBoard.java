@@ -2,7 +2,7 @@ package com.paulograbin.sudoku;
 
 public class SudokuBoard {
 
-    int[][] board;
+    private int[][] board;
 
     public void setBoard(int[][] board) {
         this.board = board;
@@ -15,8 +15,7 @@ public class SudokuBoard {
     public int[] getRow(int row) {
         int[] rowElements = new int[9];
 
-        for(int i = 0; i < 9; i++)
-            rowElements[i] = board[row][i];
+        System.arraycopy(board[row], 0, rowElements, 0, 9);
 
         return rowElements;
     }

@@ -8,7 +8,7 @@ import static org.testng.Assert.*;
 
 public class SudokuBoard_getElementTest {
 
-    SudokuBoard board;
+    private SudokuBoard board;
 
     @BeforeMethod
     public void setUp() throws Exception {
