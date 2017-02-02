@@ -20,4 +20,13 @@ public class SudokuBoard {
 
         return rowElements;
     }
+
+    public int[] getColumn(int columnId) {
+        int[] columnElements = new int[9];
+
+        for(int i = 0; i < 9; i++)
+            columnElements[i] = board[i][columnId];
+
+        return columnElements;
+    }
 }
