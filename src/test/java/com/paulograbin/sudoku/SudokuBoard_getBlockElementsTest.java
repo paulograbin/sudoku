@@ -44,7 +44,6 @@ public class SudokuBoard_getBlockElementsTest {
         int[] blockElements = board.getBlock(6, 6);
 
         List<Integer> block = fetchIntegerFromIntArray(blockElements);
-        System.out.println(block);
 
         assertHasOnlyThisElements(block, 2, 7, 8, 9);
     }
@@ -55,7 +54,6 @@ public class SudokuBoard_getBlockElementsTest {
         int[] blockElements = board.getBlock(3, 3);
 
         List<Integer> block = fetchIntegerFromIntArray(blockElements);
-        System.out.println(block);
 
         assertHasOnlyThisElements(block, 2, 3, 6, 7, 9);
     }
@@ -65,7 +63,6 @@ public class SudokuBoard_getBlockElementsTest {
         int[] blockElements = board.getBlock(4, 4);
 
         List<Integer> block = fetchIntegerFromIntArray(blockElements);
-        System.out.println(block);
 
         assertHasOnlyThisElements(block, 2, 3, 6, 7, 9);
     }
@@ -76,7 +73,6 @@ public class SudokuBoard_getBlockElementsTest {
         int[] blockElements = board.getBlock(5, 5);
 
         List<Integer> block = fetchIntegerFromIntArray(blockElements);
-        System.out.println(block);
 
         assertHasOnlyThisElements(block, 2, 3, 6, 7, 9);
     }
@@ -89,7 +85,6 @@ public class SudokuBoard_getBlockElementsTest {
         int[] blockElements = board.getBlock(0, 0);
 
         List<Integer> block = fetchIntegerFromIntArray(blockElements);
-        System.out.println(block);
 
         assertHasOnlyThisElements(block, 2, 3, 5, 4, 8);
     }
@@ -99,7 +94,6 @@ public class SudokuBoard_getBlockElementsTest {
         int[] blockElements = board.getBlock(1, 1);
 
         List<Integer> block = fetchIntegerFromIntArray(blockElements);
-        System.out.println(block);
 
         assertHasOnlyThisElements(block, 2, 3, 5, 4, 8);
     }
@@ -109,7 +103,6 @@ public class SudokuBoard_getBlockElementsTest {
         int[] blockElements = board.getBlock(2, 2);
 
         List<Integer> block = fetchIntegerFromIntArray(blockElements);
-        System.out.println(block);
 
         assertHasOnlyThisElements(block, 2, 3, 5, 4, 8);
     }

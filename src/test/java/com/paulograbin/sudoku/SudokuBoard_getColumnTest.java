@@ -44,7 +44,7 @@ public class SudokuBoard_getColumnTest {
         int[] columnElements = board.getColumn(6);
 
         List<Integer> column = fetchIntegerFromIntArray(columnElements);
-        System.out.println(column);
+        
 
         assertHasOnlyThisElements(column, 4, 6, 7, 9);
     }
@@ -54,7 +54,7 @@ public class SudokuBoard_getColumnTest {
         int[] columnElements = board.getColumn(5);
 
         List<Integer> column = fetchIntegerFromIntArray(columnElements);
-        System.out.println(column);
+        
 
         assertHasOnlyThisElements(column, 1, 4, 7, 6, 2, 5);
     }
@@ -64,7 +64,7 @@ public class SudokuBoard_getColumnTest {
         int[] columnElements = board.getColumn(4);
 
         List<Integer> column = fetchIntegerFromIntArray(columnElements);
-        System.out.println(column);
+        
 
         assertHasOnlyThisElements(column, 6, 9);
     }
@@ -74,7 +74,7 @@ public class SudokuBoard_getColumnTest {
         int[] columnElements = board.getColumn(3);
 
         List<Integer> column = fetchIntegerFromIntArray(columnElements);
-        System.out.println(column);
+        
 
         assertHasOnlyThisElements(column, 5, 6, 3, 4);
     }
@@ -84,7 +84,7 @@ public class SudokuBoard_getColumnTest {
         int[] columnElements = board.getColumn(2);
 
         List<Integer> column = fetchIntegerFromIntArray(columnElements);
-        System.out.println(column);
+        
 
         assertHasOnlyThisElements(column, 2, 4, 5, 6, 8, 3);
     }
@@ -94,7 +94,7 @@ public class SudokuBoard_getColumnTest {
         int[] columnElements = board.getColumn(1);
 
         List<Integer> column = fetchIntegerFromIntArray(columnElements);
-        System.out.println(column);
+        
 
         assertHasOnlyThisElements(column, 3, 5);
     }
@@ -104,7 +104,7 @@ public class SudokuBoard_getColumnTest {
         int[] columnElements = board.getColumn(0);
 
         List<Integer> column = fetchIntegerFromIntArray(columnElements);
-        System.out.println(column);
+        
 
         assertHasOnlyThisElements(column, 8, 5, 1, 2);
     }

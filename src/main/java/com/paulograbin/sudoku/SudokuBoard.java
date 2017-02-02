@@ -49,25 +49,7 @@ public class SudokuBoard {
     }
 
     private int getInitialY(int column) {
-        switch (column) {
-            case 0:
-            case 1:
-            case 2:
-                return 0;
-
-            case 3:
-            case 4:
-            case 5:
-                return 3;
-
-            case 6:
-            case 7:
-            case 8:
-                return 6;
-
-        }
-
-        return 0;
+        return getInitialX(column);
     }
 
     private int getInitialX(int row) {
@@ -87,8 +69,22 @@ public class SudokuBoard {
             case 8:
                 return 6;
 
-        }
+            default:
+                return 0;
 
-        return 0;
+        }
+    }
+
+    public void printBoard() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void setValueAt(Integer value, int cellRow, int cellColumn) {
+        board[cellRow][cellColumn] = value;
     }
 }

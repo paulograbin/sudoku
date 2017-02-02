@@ -45,7 +45,6 @@ public class SudokuBoard_getRowTest {
         int[] rowElements = board.getRow(2);
 
         List<Integer> row = fetchIntegerFromIntArray(rowElements);
-        System.out.println(row);
 
         assertHasOnlyThisElements(row, 3, 5, 6, 4);
     }
@@ -55,7 +54,6 @@ public class SudokuBoard_getRowTest {
         int[] rowElements = board.getRow(1);
 
         List<Integer> row = fetchIntegerFromIntArray(rowElements);
-        System.out.println(row);
 
         assertHasOnlyThisElements(row, 8, 4, 5, 1, 2);
     }
@@ -65,7 +63,7 @@ public class SudokuBoard_getRowTest {
         int[] rowElements = board.getRow(0);
 
         List<Integer> row = fetchIntegerFromIntArray(rowElements);
-        System.out.println(row);
+        
 
         assertHasOnlyThisElements(row, 2, 4, 5, 6);
     }
