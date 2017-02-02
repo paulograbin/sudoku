@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.testng.Assert.*;
+import static org.testng.AssertJUnit.assertTrue;
 
 
 public class SudokuBoard_getRowTest {
@@ -43,6 +44,7 @@ public class SudokuBoard_getRowTest {
         int[] rowElements = board.getRow(2);
 
         List<Integer> row = fetchIntegerFromIntArray(rowElements);
+        System.out.println(row);
 
         assertHasElements(row, 3, 5, 6, 4);
     }
@@ -52,6 +54,7 @@ public class SudokuBoard_getRowTest {
         int[] rowElements = board.getRow(1);
 
         List<Integer> row = fetchIntegerFromIntArray(rowElements);
+        System.out.println(row);
 
         assertHasElements(row, 8, 4, 5, 1, 2);
     }
@@ -61,13 +64,14 @@ public class SudokuBoard_getRowTest {
         int[] rowElements = board.getRow(0);
 
         List<Integer> row = fetchIntegerFromIntArray(rowElements);
+        System.out.println(row);
 
         assertHasElements(row, 2, 4, 5, 6);
     }
 
     private void assertHasElements(List<Integer> row, int ... args) {
         for(int i : args) {
-            row.contains(new Integer(i));
+            assertTrue(row.contains(new Integer(i)));
         }
     }
 
