@@ -40,7 +40,7 @@ public class SudokuBoard_getColumnTest {
 
 
     @Test
-    public void testGetColumn6() throws Exception {
+    public void testGetColumn6() {
         int[] columnElements = board.getColumn(6);
 
         List<Integer> column = fetchIntegerFromIntArray(columnElements);
@@ -50,7 +50,7 @@ public class SudokuBoard_getColumnTest {
     }
 
     @Test
-    public void testGetColumn5() throws Exception {
+    public void testGetColumn5() {
         int[] columnElements = board.getColumn(5);
 
         List<Integer> column = fetchIntegerFromIntArray(columnElements);
@@ -60,7 +60,7 @@ public class SudokuBoard_getColumnTest {
     }
 
     @Test
-    public void testGetColumn4() throws Exception {
+    public void testGetColumn4() {
         int[] columnElements = board.getColumn(4);
 
         List<Integer> column = fetchIntegerFromIntArray(columnElements);
@@ -70,7 +70,7 @@ public class SudokuBoard_getColumnTest {
     }
 
     @Test
-    public void testGetColumn3() throws Exception {
+    public void testGetColumn3() {
         int[] columnElements = board.getColumn(3);
 
         List<Integer> column = fetchIntegerFromIntArray(columnElements);
@@ -80,7 +80,7 @@ public class SudokuBoard_getColumnTest {
     }
 
     @Test
-    public void testGetColumn2() throws Exception {
+    public void testGetColumn2() {
         int[] columnElements = board.getColumn(2);
 
         List<Integer> column = fetchIntegerFromIntArray(columnElements);
@@ -90,7 +90,7 @@ public class SudokuBoard_getColumnTest {
     }
 
     @Test
-    public void testGetColumn1() throws Exception {
+    public void testGetColumn1() {
         int[] columnElements = board.getColumn(1);
 
         List<Integer> column = fetchIntegerFromIntArray(columnElements);
@@ -100,7 +100,7 @@ public class SudokuBoard_getColumnTest {
     }
 
     @Test
-    public void testGetColumn0() throws Exception {
+    public void testGetColumn0() {
         int[] columnElements = board.getColumn(0);
 
         List<Integer> column = fetchIntegerFromIntArray(columnElements);

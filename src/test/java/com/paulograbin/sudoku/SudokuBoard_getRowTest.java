@@ -17,7 +17,7 @@ public class SudokuBoard_getRowTest {
     private final List<Integer> POSSIBILITIES = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
     @BeforeMethod
-    public void setUp() throws Exception {
+    public void setUp() {
         board = new SudokuBoard();
 
         int[][] game = new int[][] {
@@ -41,7 +41,7 @@ public class SudokuBoard_getRowTest {
 
 
     @Test
-    public void testGetLine2() throws Exception {
+    public void testGetLine2() {
         int[] rowElements = board.getRow(2);
 
         List<Integer> row = fetchIntegerFromIntArray(rowElements);
@@ -50,7 +50,7 @@ public class SudokuBoard_getRowTest {
     }
 
     @Test
-    public void testGetLine1() throws Exception {
+    public void testGetLine1() {
         int[] rowElements = board.getRow(1);
 
         List<Integer> row = fetchIntegerFromIntArray(rowElements);
@@ -59,7 +59,7 @@ public class SudokuBoard_getRowTest {
     }
 
     @Test
-    public void testGetLine0() throws Exception {
+    public void testGetLine0() {
         int[] rowElements = board.getRow(0);
 
         List<Integer> row = fetchIntegerFromIntArray(rowElements);
@@ -69,8 +69,7 @@ public class SudokuBoard_getRowTest {
     }
 
     private void assertHasOnlyThisElements(List<Integer> row, int ... args) {
-        List<Integer> localPossibilities = new ArrayList<>();
-        localPossibilities.addAll(POSSIBILITIES);
+        List<Integer> localPossibilities = new ArrayList<>(POSSIBILITIES);
 
         for(int i : args) {
             assertTrue(row.contains(i));
