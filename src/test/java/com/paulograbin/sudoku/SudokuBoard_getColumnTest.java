@@ -115,7 +115,7 @@ public class SudokuBoard_getColumnTest {
 
         for(int i : args) {
             assertTrue(column.contains(i));
-            localPossibilities.remove(new Integer(i));
+            localPossibilities.remove(Integer.valueOf(i));
         }
 
         for(Integer i : localPossibilities) {

@@ -53,17 +53,17 @@ public class SudokuSolver {
 
         for(int i : board.getBlock(cellRow, cellColumn)) {
             if(i != 0)
-                localPossibilities.remove(new Integer(i));
+                localPossibilities.remove(Integer.valueOf(i));
         }
 
         for(int i : board.getRow(cellRow)) {
             if(i != 0)
-                localPossibilities.remove(new Integer(i));
+                localPossibilities.remove(Integer.valueOf(i));
         }
 
         for(int i : board.getColumn(cellColumn)) {
             if(i != 0)
-                localPossibilities.remove(new Integer(i));
+                localPossibilities.remove(Integer.valueOf(i));
         }
 
         if(localPossibilities.size() == 1) {

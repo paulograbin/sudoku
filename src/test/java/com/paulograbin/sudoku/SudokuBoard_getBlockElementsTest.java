@@ -113,7 +113,7 @@ public class SudokuBoard_getBlockElementsTest {
 
         for(int i : args) {
             assertTrue(row.contains(i));
-            localPossibilities.remove(new Integer(i));
+            localPossibilities.remove(Integer.valueOf(i));
 
         }
 
