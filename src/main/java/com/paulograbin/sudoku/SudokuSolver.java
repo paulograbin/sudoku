@@ -10,15 +10,18 @@ public class SudokuSolver {
             new HiddenSinglesStrategy()
     );
 
-    public void setBoard(SudokuBoard board) {
+    public SudokuSolver(SudokuBoard board) {
         this.board = board;
     }
 
     public void solve() {
         while (!isSolved()) {
+            System.out.println("Ready to work!");
             boolean madeProgress = false;
 
             for (SolvingStrategy strategy : strategies) {
+                System.out.println("Applying strategy: " + strategy.getClass().getSimpleName());
+
                 if (strategy.apply(board)) {
                     madeProgress = true;
                     break;

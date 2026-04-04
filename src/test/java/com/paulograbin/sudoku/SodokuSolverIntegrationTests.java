@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 public class SodokuSolverIntegrationTests {
 
-    private SudokuSolver solver = new SudokuSolver();
-
     @Test
     public void testName() throws Exception {
         int[][] game = new int[][] {
@@ -26,8 +24,7 @@ public class SodokuSolverIntegrationTests {
         };
 
         SudokuBoard board = new SudokuBoard(game);
-
-        solver.setBoard(board);
+        var solver = new SudokuSolver(board);
         solver.solve();
 
         Assertions.assertThat(board.isSolved()).isTrue();
@@ -51,7 +48,7 @@ public class SodokuSolverIntegrationTests {
         };
 
         SudokuBoard board = new SudokuBoard(game);
-        solver.setBoard(board);
+        var solver = new SudokuSolver(board);
         solver.solve();
 
         Assertions.assertThat(board.isSolved()).isTrue();
@@ -75,7 +72,7 @@ public class SodokuSolverIntegrationTests {
         };
 
         SudokuBoard board = new SudokuBoard(game);
-        solver.setBoard(board);
+        var solver = new SudokuSolver(board);
         solver.solve();
 
         Assertions.assertThat(board.isSolved()).isFalse();
@@ -99,7 +96,7 @@ public class SodokuSolverIntegrationTests {
         };
 
         SudokuBoard board = new SudokuBoard(game);
-        solver.setBoard(board);
+        var solver = new SudokuSolver(board);
         solver.solve();
 
         Assertions.assertThat(board.isSolved()).isFalse();
