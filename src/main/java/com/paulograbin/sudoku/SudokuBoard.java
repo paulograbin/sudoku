@@ -72,10 +72,11 @@ public class SudokuBoard {
     public int computeCandidates(int row, int column) {
         int allCandidates = 0b111111111;
 
-        for (int v : getNumbersFromRow(row)) {
-            allCandidates &= ~(1 << (v - 1));
-        }
-        for (int v : getNumbersFromColumn(column)) {
+        Set<Integer> alreadyFilledNumbers = new HashSet<>(getNumbersFromBlock(row, column));
+        alreadyFilledNumbers.addAll(getNumbersFromRow(row));
+        alreadyFilledNumbers.addAll(getNumbersFromColumn(column));
+
+        for (int v : alreadyFilledNumbers) {
             allCandidates &= ~(1 << (v - 1));
         }
         for (int v : getNumbersFromBlock(row, column)) {
