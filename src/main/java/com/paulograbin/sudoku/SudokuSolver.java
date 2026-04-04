@@ -38,14 +38,7 @@ public class SudokuSolver {
         board.printBoard();
     }
 
-    private boolean isSolved() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (board.getValueAt(i, j) == 0) {
-                    return false;
-                }
-            }
-        }
-        return true;
+    public boolean isSolved() {
+        return board.isSolved();
     }
 }

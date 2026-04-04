@@ -19,6 +19,17 @@ public class SudokuBoard {
         printBoard();
     }
 
+    public boolean isSolved() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (getValueAt(i, j) == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public int getValueAt(int row, int column) {
         return board[row][column];
     }
