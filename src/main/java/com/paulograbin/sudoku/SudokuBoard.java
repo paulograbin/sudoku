@@ -3,11 +3,17 @@ package com.paulograbin.sudoku;
 public class SudokuBoard {
 
     private int[][] board;
+    private int[][] candidates;
+
     public SudokuBoard(int[][] game) {
         board = game;
+        candidates = new int[9][9];
 
-    public void setBoard(int[][] board) {
-        this.board = board;
+        for (int j = 0; j < candidates.length; j++) {
+            int[] candidate = candidates[j];
+            Arrays.fill(candidate, 0b111111111);
+        }
+
         printBoard();
     }
 
