@@ -15,16 +15,21 @@ import java.util.Set;
         ...
         Bit 8 represents the value 9.
 
+        Thus, a bitmask 000000001 means that only the value 1 is possible on a given cell, and so
+        100000000 means that only value 9 is possible
+        100000001 means that possible vlaues are 1 and 9
+        100010001 means that possible vlaues are 1, 5 and 9
+        110010001 means that possible vlaues are 1, 5, 8 and 9
+
         To count how manu candidates are present we use Integer.bitCount()
         To remove a value from the candidates we use = ~(1 << ( vvalue -1 ) )
 
         We can also represent the bitmasks as int, so for instance:
-        511 means 0b111111111
+        0b111111111 is equal to 511
+        0b000000001 is equal to 1
 
       When a single bit is set in the bitmask we know for sure there is only one possible value for a cell,
       so we use Integer.numberOfTrailingZeros(candidates) + 1 to get the decimal value.
-
-
  */
 public class SudokuBoard {
 
@@ -79,12 +84,6 @@ public class SudokuBoard {
         for (int v : alreadyFilledNumbers) {
             allCandidates &= ~(1 << (v - 1));
         }
-        for (int v : getNumbersFromBlock(row, column)) {
-            allCandidates &= ~(1 << (v - 1));
-        }
-
-        System.out.println("Computing candidates for row: " + row + " column: " + column +
-                " allCandidates: " + Long.toBinaryString(allCandidates) + "/" + Integer.numberOfTrailingZeros(allCandidates) + 1);
 
         candidates[row][column] = allCandidates;
         return allCandidates;
