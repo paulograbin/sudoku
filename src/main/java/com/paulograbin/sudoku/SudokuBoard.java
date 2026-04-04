@@ -4,6 +4,28 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/*
+
+     To track the candidates for a given cell we use a bitmask like 111111111.
+     Initially the candidate for every cell starts with value 111111111, meaning that all values from 1 to 9 are still valid candidates.
+
+     A bit set means that value N+1 is a candidate, for instance:
+        Bit 0 represents the value 1,,
+        Bit 1 represents the value 2,
+        ...
+        Bit 8 represents the value 9.
+
+        To count how manu candidates are present we use Integer.bitCount()
+        To remove a value from the candidates we use = ~(1 << ( vvalue -1 ) )
+
+        We can also represent the bitmasks as int, so for instance:
+        511 means 0b111111111
+
+      When a single bit is set in the bitmask we know for sure there is only one possible value for a cell,
+      so we use Integer.numberOfTrailingZeros(candidates) + 1 to get the decimal value.
+
+
+ */
 public class SudokuBoard {
 
     private final int[][] board;
@@ -14,8 +36,7 @@ public class SudokuBoard {
         board = game;
         candidates = new int[9][9];
 
-        for (int j = 0; j < candidates.length; j++) {
-            int[] candidate = candidates[j];
+        for (int[] candidate : candidates) {
             Arrays.fill(candidate, 0b111111111);
         }
 
