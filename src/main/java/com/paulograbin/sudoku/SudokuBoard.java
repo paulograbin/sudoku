@@ -19,7 +19,14 @@ public class SudokuBoard {
             Arrays.fill(candidate, 0b111111111);
         }
 
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board.length; col++) {
+                computeCandidates(row, col);
+            }
+        }
+
         printBoard();
+//        printCandidates();
     }
 
     public boolean isSolved() {
@@ -41,24 +48,24 @@ public class SudokuBoard {
         return candidates[row][column];
     }
 
-    public void setCandidatesForCell(int row, int column, int newCandidates) {
-        candidates[row][column] = newCandidates;
-    }
-
-    public int computeCandidates(int row, int col) {
-        int candidates = getCandidatesForCell(row, col);
+    public int computeCandidates(int row, int column) {
+        int allCandidates = 0b111111111;
 
         for (int v : getNumbersFromRow(row)) {
-            candidates &= ~(1 << (v - 1));
+            allCandidates &= ~(1 << (v - 1));
         }
-        for (int v : getNumbersFromColumn(col)) {
-            candidates &= ~(1 << (v - 1));
+        for (int v : getNumbersFromColumn(column)) {
+            allCandidates &= ~(1 << (v - 1));
         }
-        for (int v : getNumbersFromBlock(row, col)) {
-            candidates &= ~(1 << (v - 1));
+        for (int v : getNumbersFromBlock(row, column)) {
+            allCandidates &= ~(1 << (v - 1));
         }
 
-        return candidates;
+        System.out.println("Computing candidates for row: " + row + " column: " + column +
+                " allCandidates: " + Long.toBinaryString(allCandidates) + "/" + Integer.numberOfTrailingZeros(allCandidates) + 1);
+
+        candidates[row][column] = allCandidates;
+        return allCandidates;
     }
 
     public int[] getRow(int row) {
@@ -168,6 +175,23 @@ public class SudokuBoard {
                 }
 
                 System.out.print(board[i][j] == 0 ? ". " : board[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void printCandidates() {
+        for (int i = 0; i < 9; i++) {
+            if (i % 3 == 0 && i > 0) {
+                System.out.println("------+-------+------");
+            }
+
+            for (int j = 0; j < 9; j++) {
+                if (j % 3 == 0 && j != 0) {
+                    System.out.print("| ");
+                }
+
+                System.out.print(candidates[i][j] == 0 ? ". " : Long.toBinaryString(candidates[i][j]) + "/" + Integer.numberOfTrailingZeros(candidates[i][j]) + 1 + " ");
             }
             System.out.println();
         }

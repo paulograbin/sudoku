@@ -21,7 +21,6 @@ public class NakedSinglesStrategy implements SolvingStrategy {
 
     private boolean solveCell(SudokuBoard board, int row, int col) {
         int candidates = board.computeCandidates(row, col);
-        board.setCandidatesForCell(row, col, candidates);
 
         if (Integer.bitCount(candidates) == 1) {
             int value = Integer.numberOfTrailingZeros(candidates) + 1;
