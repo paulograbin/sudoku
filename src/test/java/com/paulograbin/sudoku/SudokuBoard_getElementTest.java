@@ -1,16 +1,16 @@
 package com.paulograbin.sudoku;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SudokuBoard_getElementTest {
 
     private SudokuBoard board;
 
-    @BeforeMethod
+    @BeforeEach
     public void setUp() throws Exception {
         int[][] game = new int[][] {
 //               0, 1, 2,   3, 4, 5,   6, 7, 8

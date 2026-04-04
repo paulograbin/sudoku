@@ -1,14 +1,13 @@
 package com.paulograbin.sudoku;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class SudokuBoard_getBlockElementsTest {
@@ -16,8 +15,8 @@ public class SudokuBoard_getBlockElementsTest {
     private SudokuBoard board;
     private final List<Integer> POSSIBILITIES = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
-    @BeforeMethod
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         int[][] game = new int[][]{
 //               0, 1, 2,   3, 4, 5,   6, 7, 8
                 {0, 0, 2, 0, 0, 0, 4, 6, 5}, // 0
@@ -106,13 +105,13 @@ public class SudokuBoard_getBlockElementsTest {
         List<Integer> localPossibilities = new ArrayList<>(POSSIBILITIES);
 
         for (int i : args) {
-            assertTrue(row.contains(i));
+            assertThat(row.contains(i)).isTrue();
             localPossibilities.remove(Integer.valueOf(i));
 
         }
 
         for (Integer i : localPossibilities) {
-            assertFalse(row.contains(i));
+            assertThat(row.contains(i)).isFalse();
         }
     }
 
