@@ -1,5 +1,7 @@
 package com.paulograbin.sudoku;
 
+import java.util.Arrays;
+
 public class SudokuBoard {
 
     private int[][] board;
@@ -32,7 +34,7 @@ public class SudokuBoard {
     public int[] getColumn(int columnId) {
         int[] columnElements = new int[9];
 
-        for(int i = 0; i < 9; i++)
+        for (int i = 0; i < 9; i++)
             columnElements[i] = board[i][columnId];
 
         return columnElements;
@@ -48,8 +50,8 @@ public class SudokuBoard {
         int finalX = initialX + 2;
         int finalY = initialY + 2;
 
-        for(int i = initialX; i <= finalX; i++)
-            for(int j = initialY; j <= finalY; j++) {
+        for (int i = initialX; i <= finalX; i++)
+            for (int j = initialY; j <= finalY; j++) {
                 blockElements[count] = board[i][j];
                 count = count + 1;
             }
