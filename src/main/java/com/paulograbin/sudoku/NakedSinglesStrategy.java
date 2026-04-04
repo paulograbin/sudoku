@@ -1,12 +1,6 @@
 package com.paulograbin.sudoku;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class NakedSinglesStrategy implements SolvingStrategy {
-
-    private static final List<Integer> POSSIBILITIES = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
     @Override
     public boolean apply(SudokuBoard board) {
@@ -25,26 +19,13 @@ public class NakedSinglesStrategy implements SolvingStrategy {
         return madeProgress;
     }
 
-    private boolean solveCell(SudokuBoard board, int cellRow, int cellColumn) {
-        List<Integer> candidates = new ArrayList<>(POSSIBILITIES);
+    private boolean solveCell(SudokuBoard board, int row, int col) {
+        int candidates = board.computeCandidates(row, col);
+        board.setCandidatesForCell(row, col, candidates);
 
-        for (int i : board.getBlock(cellRow, cellColumn)) {
-            if (i != 0)
-                candidates.remove(Integer.valueOf(i));
-        }
-
-        for (int i : board.getRow(cellRow)) {
-            if (i != 0)
-                candidates.remove(Integer.valueOf(i));
-        }
-
-        for (int i : board.getColumn(cellColumn)) {
-            if (i != 0)
-                candidates.remove(Integer.valueOf(i));
-        }
-
-        if (candidates.size() == 1) {
-            board.setValueAt(candidates.get(0), cellRow, cellColumn);
+        if (Integer.bitCount(candidates) == 1) {
+            int value = Integer.numberOfTrailingZeros(candidates) + 1;
+            board.setValueAt(value, row, col);
             return true;
         }
 
