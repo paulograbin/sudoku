@@ -53,26 +53,12 @@ public class SudokuBoard {
     }
 
     private int getInitialX(int row) {
-        switch (row) {
-            case 0:
-            case 1:
-            case 2:
-                return 0;
-
-            case 3:
-            case 4:
-            case 5:
-                return 3;
-
-            case 6:
-            case 7:
-            case 8:
-                return 6;
-
-            default:
-                return 0;
-
-        }
+        return switch (row) {
+            case 0, 1, 2 -> 0;
+            case 3, 4, 5 -> 3;
+            case 6, 7, 8 -> 6;
+            default -> 0;
+        };
     }
 
     public void printBoard() {
