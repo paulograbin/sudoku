@@ -3,9 +3,12 @@ package com.paulograbin.sudoku;
 public class SudokuBoard {
 
     private int[][] board;
+    public SudokuBoard(int[][] game) {
+        board = game;
 
     public void setBoard(int[][] board) {
         this.board = board;
+        printBoard();
     }
 
     public int getValueAt(int row, int column) {

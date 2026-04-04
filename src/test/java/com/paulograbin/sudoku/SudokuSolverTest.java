@@ -24,8 +24,7 @@ public class SudokuSolverTest {
                 {2, 0, 3,   4, 0, 5,   9, 7, 0}  // 8
         };
 
-        SudokuBoard board = new SudokuBoard();
-        board.setBoard(game);
+        SudokuBoard board = new SudokuBoard(game);
 
         solver.setBoard(board);
         solver.solve();

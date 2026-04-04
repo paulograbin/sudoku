@@ -18,7 +18,6 @@ public class SudokuBoard_getRowTest {
 
     @BeforeMethod
     public void setUp() {
-        board = new SudokuBoard();
 
         int[][] game = new int[][] {
 //               0, 1, 2,   3, 4, 5,   6, 7, 8
@@ -35,7 +34,7 @@ public class SudokuBoard_getRowTest {
                 {2, 0, 3,   4, 0, 5,   9, 7, 0}  // 8
         };
 
-        board.setBoard(game);
+        board = new SudokuBoard(game);
     }
 
 
