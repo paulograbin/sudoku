@@ -85,8 +85,16 @@ public class SudokuBoard {
 
     public void printBoard() {
         for (int i = 0; i < 9; i++) {
+            if (i % 3 == 0 && i > 0) {
+                System.out.println("------+-------+------");
+            }
+
             for (int j = 0; j < 9; j++) {
-                System.out.print(board[i][j] + " ");
+                if (j % 3 == 0 && j != 0) {
+                    System.out.print("| ");
+                }
+
+                System.out.print(board[i][j] == 0 ? ". " : board[i][j] + " ");
             }
             System.out.println();
         }
