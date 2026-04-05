@@ -1,11 +1,10 @@
 package com.paulograbin.sudoku;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
+
+import static com.paulograbin.sudoku.SudokuBoard.POSSIBLE_VALUES;
 
 public class HiddenSinglesStrategy implements SolvingStrategy {
-
-    private static final List<Integer> POSSIBILITIES = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
     @Override
     public boolean apply(SudokuBoard board) {

@@ -2,6 +2,7 @@ package com.paulograbin.sudoku;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /*
@@ -35,6 +36,8 @@ public class SudokuBoard {
 
     private final int[][] board;
     private final int[][] candidates;
+
+    public static final List<Integer> POSSIBLE_VALUES = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
 
     public SudokuBoard(int[][] game) {
@@ -164,7 +167,7 @@ public class SudokuBoard {
                     System.out.print("| ");
                 }
 
-                System.out.print(candidates[i][j] == 0 ? ". " : Long.toBinaryString(candidates[i][j]) + "/" + Integer.numberOfTrailingZeros(candidates[i][j]) + 1 + " ");
+                System.out.print(candidates[i][j] == 0 ? ". " : Long.toBinaryString(candidates[i][j]) + "/" + (Integer.numberOfTrailingZeros(candidates[i][j]) + 1) + " ");
             }
             System.out.println();
         }
