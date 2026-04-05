@@ -117,22 +117,20 @@ public class HiddenSinglesStrategy implements SolvingStrategy {
     }
 
     private boolean rowContains(SudokuBoard board, int row, int value) {
-        for (int v : board.getRow(row)) {
-            if (v == value) return true;
-        }
-        return false;
+        System.out.println("Checking row contains " + value + " in row " + row);
+
+        return board.getNumbersFromRow(row).contains(value);
     }
 
     private boolean columnContains(SudokuBoard board, int col, int value) {
-        for (int v : board.getColumn(col)) {
-            if (v == value) return true;
-        }
-        return false;
+        System.out.println("Checking column contains " + value + " in column " + col);
+
+        return board.getNumbersFromColumn(col).contains(value);
     }
 
     private boolean blockContains(SudokuBoard board, int row, int col, int value) {
-        Set<Integer> numbersFromBlock = board.getNumbersFromBlock(row, col);
+        System.out.println("Checking block contains " + value + " in row " + row + " column " + col);
 
-        return numbersFromBlock.contains(value);
+        return board.getNumbersFromBlock(row, col).contains(value);
     }
 }
