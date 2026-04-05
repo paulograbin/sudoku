@@ -10,7 +10,7 @@ public class NakedSinglesStrategy implements SolvingStrategy {
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (board.getValueAt(i, j) == 0) {
+                if (board.getValueAt(i, j) == 0) { // Only solve cell if it has not already been solved
                     if (solveCell(board, i, j)) {
                         madeProgress = true;
                     }
