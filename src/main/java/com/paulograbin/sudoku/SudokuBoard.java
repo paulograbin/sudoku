@@ -89,20 +89,6 @@ public class SudokuBoard {
         return allCandidates;
     }
 
-    /**
-     * Returns an int  array of size 9 with all the numbers already present in the row.
-     * Non filled numbers are 0
-     * <p>
-     * Deprecated in favor of getNumbersFromRow() which does not return 0
-     */
-    public int[] getRow(int row) {
-        int[] rowElements = new int[9];
-
-        System.arraycopy(board[row], 0, rowElements, 0, 9);
-
-        return rowElements;
-    }
-
     public Set<Integer> getNumbersFromRow(int row) {
         return Arrays.stream(board[row])
                 .filter(i -> i > 0)

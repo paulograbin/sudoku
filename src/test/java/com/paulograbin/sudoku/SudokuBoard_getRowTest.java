@@ -3,9 +3,7 @@ package com.paulograbin.sudoku;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,7 +16,6 @@ public class SudokuBoard_getRowTest {
 
     @BeforeEach
     void setUp() {
-
         int[][] game = new int[][] {
 //               0, 1, 2,   3, 4, 5,   6, 7, 8
                 {0, 0, 2,   0, 0, 0,   4, 6, 5}, // 0
@@ -38,57 +35,38 @@ public class SudokuBoard_getRowTest {
     }
 
 
-
     @Test
     public void testGetLine2() {
-        int[] rowElements = board.getRow(2);
+        var rowElements = board.getNumbersFromRow(2);
 
-        List<Integer> row = fetchIntegerFromIntArray(rowElements);
-
-        assertHasOnlyThisElements(row, 3, 5, 6, 4);
+        assertHasOnlyThisElements(rowElements, 3, 5, 6, 4);
     }
 
     @Test
     public void testGetLine1() {
-        int[] rowElements = board.getRow(1);
+        var rowElements = board.getNumbersFromRow(1);
 
-        List<Integer> row = fetchIntegerFromIntArray(rowElements);
-
-        assertHasOnlyThisElements(row, 8, 4, 5, 1, 2);
+        assertHasOnlyThisElements(rowElements, 8, 4, 5, 1, 2);
     }
 
     @Test
     public void testGetLine0() {
-        int[] rowElements = board.getRow(0);
+        var rowElements = board.getNumbersFromRow(0);
 
-        List<Integer> row = fetchIntegerFromIntArray(rowElements);
-        
 
-        assertHasOnlyThisElements(row, 2, 4, 5, 6);
+        assertHasOnlyThisElements(rowElements, 2, 4, 5, 6);
     }
 
-    private void assertHasOnlyThisElements(List<Integer> row, int ... args) {
-        List<Integer> localPossibilities = new ArrayList<>(POSSIBILITIES);
+    private void assertHasOnlyThisElements(Set<Integer> row, int ... args) {
+        var localPossibilities = new HashSet<>(POSSIBILITIES);
 
         for(int i : args) {
             assertTrue(row.contains(i));
-            localPossibilities.remove(Integer.valueOf(i));
-
+            localPossibilities.remove(i);
         }
 
         for(Integer i : localPossibilities) {
             assertFalse(row.contains(i));
         }
-    }
-
-    private List<Integer> fetchIntegerFromIntArray(int[] rowElements) {
-        List<Integer> elements = new ArrayList<>();
-
-        for(int i : rowElements) {
-            if(i > 0)
-                elements.add(i);
-        }
-
-        return elements;
     }
 }
