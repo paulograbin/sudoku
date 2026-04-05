@@ -45,6 +45,8 @@ public class HiddenSinglesStrategy implements SolvingStrategy {
 
             if (count == 1) {
                 board.setValueAt(candidate, row, lastCol);
+                System.out.println("Add value " + candidate + " to row " + row + " column " + lastCol);
+                board.printBoard();
                 madeProgress = true;
             }
         }
@@ -69,7 +71,9 @@ public class HiddenSinglesStrategy implements SolvingStrategy {
             }
 
             if (count == 1) {
+                System.out.println("Add value " + candidate + " to row " + lastRow + " column " + col);
                 board.setValueAt(candidate, lastRow, col);
+                board.printBoard();
                 madeProgress = true;
             }
         }
@@ -99,6 +103,7 @@ public class HiddenSinglesStrategy implements SolvingStrategy {
 
             if (count == 1) {
                 board.setValueAt(candidate, lastRow, lastCol);
+                System.out.println("Add value " + candidate + " to row " + lastRow + " column " + lastCol);
                 madeProgress = true;
             }
         }
