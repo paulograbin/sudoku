@@ -89,6 +89,12 @@ public class SudokuBoard {
         return allCandidates;
     }
 
+    /**
+     * Returns an int  array of size 9 with all the numbers already present in the row.
+     * Non filled numbers are 0
+     * <p>
+     * Deprecated in favor of getNumbersFromRow() which does not return 0
+     */
     public int[] getRow(int row) {
         int[] rowElements = new int[9];
 
@@ -97,7 +103,12 @@ public class SudokuBoard {
         return rowElements;
     }
 
-
+    /**
+     * Returns an int  array of size 9 with all the numbers already present in the column.
+     * Non filled numbers are 0
+     * <p>
+     * Deprecated in favor of getNumbersFromColumn() which does not return 0
+     */
     public int[] getColumn(int columnId) {
         int[] columnElements = new int[9];
 
