@@ -94,6 +94,15 @@ public class SodokuSolverIntegrationTests {
     }
 
     @Test
+    public void anotherEasy() {
+        SudokuBoard board = new SudokuBoard(EASY_FIRST_GAME);
+        var solver = new SudokuSolver(board);
+        solver.solve();
+
+        Assertions.assertThat(board.isSolved()).isFalse();
+    }
+
+    @Test
     public void hard() {
         SudokuBoard board = new SudokuBoard(HARD_GAME);
         var solver = new SudokuSolver(board);
