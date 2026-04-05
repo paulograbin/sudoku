@@ -3,9 +3,7 @@ package com.paulograbin.sudoku;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -37,9 +35,7 @@ public class SudokuBoard_getBlockElementsTest {
 
     @Test
     public void testGetBlockOfCell66() {
-        int[] blockElements = board.getBlock(6, 6);
-
-        List<Integer> block = fetchIntegerFromIntArray(blockElements);
+        var block = board.getNumbersFromBlock(6, 6);
 
         assertHasOnlyThisElements(block, 2, 7, 8, 9);
     }
@@ -47,82 +43,58 @@ public class SudokuBoard_getBlockElementsTest {
 
     @Test
     public void testGetBlockOfCell33() {
-        int[] blockElements = board.getBlock(3, 3);
-
-        List<Integer> block = fetchIntegerFromIntArray(blockElements);
+        var block = board.getNumbersFromBlock(3, 3);
 
         assertHasOnlyThisElements(block, 2, 3, 6, 7, 9);
     }
 
     @Test
     public void testGetBlockOfCell44() {
-        int[] blockElements = board.getBlock(4, 4);
+        var blockElements = board.getNumbersFromBlock(4, 4);
 
-        List<Integer> block = fetchIntegerFromIntArray(blockElements);
-
-        assertHasOnlyThisElements(block, 2, 3, 6, 7, 9);
+        assertHasOnlyThisElements(blockElements, 2, 3, 6, 7, 9);
     }
 
 
     @Test
     public void testGetBlockOfCell55() {
-        int[] blockElements = board.getBlock(5, 5);
+        var blockElements = board.getNumbersFromBlock(5, 5);
 
-        List<Integer> block = fetchIntegerFromIntArray(blockElements);
-
-        assertHasOnlyThisElements(block, 2, 3, 6, 7, 9);
+        assertHasOnlyThisElements(blockElements, 2, 3, 6, 7, 9);
     }
 
 
     @Test
     public void testGetBlockOfCell00() {
-        int[] blockElements = board.getBlock(0, 0);
+        var blockElements = board.getNumbersFromBlock(0, 0);
 
-        List<Integer> block = fetchIntegerFromIntArray(blockElements);
-
-        assertHasOnlyThisElements(block, 2, 3, 5, 4, 8);
+        assertHasOnlyThisElements(blockElements, 2, 3, 5, 4, 8);
     }
 
     @Test
     public void testGetBlockOfCell11() {
-        int[] blockElements = board.getBlock(1, 1);
+        var blockElements = board.getNumbersFromBlock(1, 1);
 
-        List<Integer> block = fetchIntegerFromIntArray(blockElements);
-
-        assertHasOnlyThisElements(block, 2, 3, 5, 4, 8);
+        assertHasOnlyThisElements(blockElements, 2, 3, 5, 4, 8);
     }
 
     @Test
     public void testGetBlockOfCell22() {
-        int[] blockElements = board.getBlock(2, 2);
+        Set<Integer> numbersFromBlock = board.getNumbersFromBlock(2, 2);
 
-        List<Integer> block = fetchIntegerFromIntArray(blockElements);
-
-        assertHasOnlyThisElements(block, 2, 3, 5, 4, 8);
+        assertHasOnlyThisElements(numbersFromBlock, 2, 3, 5, 4, 8);
     }
 
-    private void assertHasOnlyThisElements(List<Integer> row, int... args) {
-        List<Integer> localPossibilities = new ArrayList<>(POSSIBILITIES);
+    private void assertHasOnlyThisElements(Set<Integer> row, int... args) {
+        var localPossibilities = new HashSet<>(POSSIBILITIES);
 
         for (int i : args) {
             assertThat(row.contains(i)).isTrue();
-            localPossibilities.remove(Integer.valueOf(i));
-
+            localPossibilities.remove(i);
         }
 
         for (Integer i : localPossibilities) {
             assertThat(row.contains(i)).isFalse();
         }
-    }
-
-    private List<Integer> fetchIntegerFromIntArray(int[] rowElements) {
-        List<Integer> elements = new ArrayList<>();
-
-        for (int i : rowElements) {
-            if (i > 0)
-                elements.add(i);
-        }
-
-        return elements;
     }
 }

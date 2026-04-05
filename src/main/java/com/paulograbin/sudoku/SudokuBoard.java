@@ -156,32 +156,6 @@ public class SudokuBoard {
         return numbersInBlock;
     }
 
-    /**
-     * Returns an int  array of size 9 with all the numbers already present in the block.
-     * Non filled numbers are 0
-     * <p>
-     * Deprecated in favor of getNumbersFromBlock() which does not return 0
-     */
-    @Deprecated(since = "April 4, 2026", forRemoval = true)
-    public int[] getBlock(int row, int column) {
-        int[] blockElements = new int[9];
-        int count = 0;
-
-        int initialX = getInitialX(row);
-        int initialY = getInitialY(column);
-
-        int finalX = initialX + 2;
-        int finalY = initialY + 2;
-
-        for (int i = initialX; i <= finalX; i++)
-            for (int j = initialY; j <= finalY; j++) {
-                blockElements[count] = board[i][j];
-                count = count + 1;
-            }
-
-        return blockElements;
-    }
-
     private int getInitialY(int column) {
         return getInitialX(column);
     }

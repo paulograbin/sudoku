@@ -132,9 +132,8 @@ public class HiddenSinglesStrategy implements SolvingStrategy {
     }
 
     private boolean blockContains(SudokuBoard board, int row, int col, int value) {
-        for (int v : board.getBlock(row, col)) {
-            if (v == value) return true;
-        }
-        return false;
+        Set<Integer> numbersFromBlock = board.getNumbersFromBlock(row, col);
+
+        return numbersFromBlock.contains(value);
     }
 }
