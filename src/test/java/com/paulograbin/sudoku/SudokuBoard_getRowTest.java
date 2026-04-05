@@ -34,7 +34,6 @@ public class SudokuBoard_getRowTest {
         board = new SudokuBoard(game);
     }
 
-
     @Test
     public void testGetLine2() {
         var rowElements = board.getNumbersFromRow(2);
@@ -52,7 +51,6 @@ public class SudokuBoard_getRowTest {
     @Test
     public void testGetLine0() {
         var rowElements = board.getNumbersFromRow(0);
-
 
         assertHasOnlyThisElements(rowElements, 2, 4, 5, 6);
     }

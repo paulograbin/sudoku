@@ -70,10 +70,6 @@ public class SudokuBoard {
         return board[row][column];
     }
 
-    public int getCandidatesForCell(int row, int column) {
-        return candidates[row][column];
-    }
-
     public int computeCandidates(int row, int column) {
         int allCandidates = 0b111111111;
 
