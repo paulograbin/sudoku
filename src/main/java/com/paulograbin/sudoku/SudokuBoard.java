@@ -175,5 +175,6 @@ public class SudokuBoard {
 
     public void setValueAt(Integer value, int cellRow, int cellColumn) {
         board[cellRow][cellColumn] = value;
+        candidates[cellRow][cellColumn] = 0;
     }
 }
