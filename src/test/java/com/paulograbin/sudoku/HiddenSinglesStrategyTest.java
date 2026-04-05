@@ -7,9 +7,10 @@ import static com.paulograbin.sudoku.BoardRepository.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 public class HiddenSinglesStrategyTest {
 
-    private final HiddenSinglesStrategy strategy = new HiddenSinglesStrategy();
+    private final SolvingStrategy strategy = new HiddenSinglesStrategy();
 
     @Test
     public void testHiddenSingleInRow() {
