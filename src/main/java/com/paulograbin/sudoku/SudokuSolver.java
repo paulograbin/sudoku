@@ -4,7 +4,7 @@ import java.util.List;
 
 public class SudokuSolver {
 
-    private SudokuBoard board;
+    private final SudokuBoard board;
     private final List<SolvingStrategy> strategies = List.of(
             new NakedSinglesStrategy(),
             new HiddenSinglesStrategy()
@@ -20,7 +20,7 @@ public class SudokuSolver {
             boolean madeProgress = false;
 
             for (SolvingStrategy strategy : strategies) {
-                System.out.println("Applying strategy: " + strategy.getClass().getSimpleName());
+
 
                 if (strategy.apply(board)) {
                     madeProgress = true;

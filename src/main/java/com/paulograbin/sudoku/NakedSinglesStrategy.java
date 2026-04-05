@@ -4,6 +4,8 @@ public class NakedSinglesStrategy implements SolvingStrategy {
 
     @Override
     public boolean apply(SudokuBoard board) {
+        System.out.println("Applying strategy: " + this.getClass().getSimpleName());
+
         boolean madeProgress = false;
 
         for (int i = 0; i < 9; i++) {
