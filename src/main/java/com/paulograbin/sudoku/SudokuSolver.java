@@ -7,7 +7,8 @@ public class SudokuSolver {
     private final SudokuBoard board;
     private final List<SolvingStrategy> strategies = List.of(
             new NakedSinglesStrategy(),
-            new HiddenSinglesStrategy()
+            new HiddenSinglesStrategy(),
+            new NakedPairsStrategy()
     );
 
     public SudokuSolver(SudokuBoard board) {
