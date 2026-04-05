@@ -27,16 +27,23 @@ public class HiddenSinglesStrategy implements SolvingStrategy {
     }
 
     private boolean scanRow(SudokuBoard board, int row) {
+        System.out.println("Scanning row: " + row);
+
         boolean madeProgress = false;
 
-        for (int candidate : POSSIBILITIES) {
-            if (rowContains(board, row, candidate)) continue;
+        for (int candidate : POSSIBLE_VALUES) {
+            Set<Integer> numbersAlreadyInRow = board.getNumbersFromRow(row);
+
+            if (numbersAlreadyInRow.contains(candidate))
+                continue;
 
             int count = 0;
             int lastCol = -1;
 
             for (int col = 0; col < 9; col++) {
-                if (board.getValueAt(row, col) == 0 && canPlace(board, row, col, candidate)) {
+                int i = board.computeCandidates(row, col);
+
+                if (board.getValueAt(row, col) == 0 && isCandidate(i, candidate)) {
                     count++;
                     lastCol = col;
                 }
@@ -53,10 +60,15 @@ public class HiddenSinglesStrategy implements SolvingStrategy {
         return madeProgress;
     }
 
+    private boolean isCandidate(int candidates, int value) {
+        return (candidates & (1 << (value -1))) != 0;
+    }
+
     private boolean scanColumn(SudokuBoard board, int col) {
+        System.out.println("Scanning column: " + col);
         boolean madeProgress = false;
 
-        for (int candidate : POSSIBILITIES) {
+        for (int candidate : POSSIBLE_VALUES) {
             if (columnContains(board, col, candidate)) continue;
 
             int count = 0;
@@ -83,8 +95,9 @@ public class HiddenSinglesStrategy implements SolvingStrategy {
     private boolean scanBlock(SudokuBoard board, int blockRow, int blockCol) {
         boolean madeProgress = false;
 
-        for (int candidate : POSSIBILITIES) {
-            if (blockContains(board, blockRow, blockCol, candidate)) continue;
+        for (int candidate : POSSIBLE_VALUES) {
+            if (blockContains(board, blockRow, blockCol, candidate))
+                continue;
 
             int count = 0;
             int lastRow = -1;
