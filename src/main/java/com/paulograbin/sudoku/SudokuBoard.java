@@ -103,21 +103,6 @@ public class SudokuBoard {
         return rowElements;
     }
 
-    /**
-     * Returns an int  array of size 9 with all the numbers already present in the column.
-     * Non filled numbers are 0
-     * <p>
-     * Deprecated in favor of getNumbersFromColumn() which does not return 0
-     */
-    public int[] getColumn(int columnId) {
-        int[] columnElements = new int[9];
-
-        for (int i = 0; i < 9; i++)
-            columnElements[i] = board[i][columnId];
-
-        return columnElements;
-    }
-
     public Set<Integer> getNumbersFromRow(int row) {
         return Arrays.stream(board[row])
                 .filter(i -> i > 0)

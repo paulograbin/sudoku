@@ -1,12 +1,9 @@
 package com.paulograbin.sudoku;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -37,99 +34,66 @@ public class SudokuBoard_getColumnTest {
         board = new SudokuBoard(game);
     }
 
-
     @Test
     public void testGetColumn6() {
-        int[] columnElements = board.getColumn(6);
+        var columnElements = board.getNumbersFromColumn(6);
 
-        List<Integer> column = fetchIntegerFromIntArray(columnElements);
-        
-
-        assertHasOnlyThisElements(column, 4, 6, 7, 9);
+        assertHasOnlyThisElements(columnElements, 4, 6, 7, 9);
     }
 
     @Test
     public void testGetColumn5() {
-        int[] columnElements = board.getColumn(5);
+        var columnElements = board.getNumbersFromColumn(5);
 
-        List<Integer> column = fetchIntegerFromIntArray(columnElements);
-        
-
-        assertHasOnlyThisElements(column, 1, 4, 7, 6, 2, 5);
+        assertHasOnlyThisElements(columnElements, 1, 4, 7, 6, 2, 5);
     }
 
     @Test
     public void testGetColumn4() {
-        int[] columnElements = board.getColumn(4);
+        var columnElements = board.getNumbersFromColumn(4);
 
-        List<Integer> column = fetchIntegerFromIntArray(columnElements);
-        
-
-        assertHasOnlyThisElements(column, 6, 9);
+        assertHasOnlyThisElements(columnElements, 6, 9);
     }
 
     @Test
     public void testGetColumn3() {
-        int[] columnElements = board.getColumn(3);
+        var columnElements = board.getNumbersFromColumn(3);
 
-        List<Integer> column = fetchIntegerFromIntArray(columnElements);
-        
-
-        assertHasOnlyThisElements(column, 5, 6, 3, 4);
+        assertHasOnlyThisElements(columnElements, 5, 6, 3, 4);
     }
 
     @Test
     public void testGetColumn2() {
-        int[] columnElements = board.getColumn(2);
+        var columnElements = board.getNumbersFromColumn(2);
 
-        List<Integer> column = fetchIntegerFromIntArray(columnElements);
-        
-
-        assertHasOnlyThisElements(column, 2, 4, 5, 6, 8, 3);
+        assertHasOnlyThisElements(columnElements, 2, 4, 5, 6, 8, 3);
     }
 
     @Test
     public void testGetColumn1() {
-        int[] columnElements = board.getColumn(1);
+        var columnElements = board.getNumbersFromColumn(1);
 
-        List<Integer> column = fetchIntegerFromIntArray(columnElements);
-        
 
-        assertHasOnlyThisElements(column, 3, 5);
+        assertHasOnlyThisElements(columnElements, 3, 5);
     }
 
     @Test
     public void testGetColumn0() {
-        int[] columnElements = board.getColumn(0);
+        var columnElements = board.getNumbersFromColumn(0);
 
-        List<Integer> column = fetchIntegerFromIntArray(columnElements);
-        
-
-        assertHasOnlyThisElements(column, 8, 5, 1, 2);
+        assertHasOnlyThisElements(columnElements, 8, 5, 1, 2);
     }
 
-    private void assertHasOnlyThisElements(List<Integer> column, int ... args) {
-        List<Integer> localPossibilities = new ArrayList<>();
-        localPossibilities.addAll(POSSIBILITIES);
+    private void assertHasOnlyThisElements(Set<Integer> column, int ... args) {
+        var localPossibilities = new HashSet<>(POSSIBILITIES);
 
         for(int i : args) {
             assertTrue(column.contains(i));
-            localPossibilities.remove(Integer.valueOf(i));
+            localPossibilities.remove(i);
         }
 
         for(Integer i : localPossibilities) {
             assertFalse(column.contains(i));
         }
-    }
-
-    private List<Integer> fetchIntegerFromIntArray(int[] rowElements) {
-        List<Integer> elements = new ArrayList<>();
-
-        for(int i : rowElements) {
-            if(i > 0)
-                elements.add(i);
-        }
-
-        return elements;
     }
 }
