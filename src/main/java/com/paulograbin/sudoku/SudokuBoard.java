@@ -40,6 +40,18 @@ public class SudokuBoard {
     public static final List<Integer> POSSIBLE_VALUES = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
 
+
+    int getCandidates(int row, int column) {
+        return candidates[row][column];
+    }
+
+    void eliminateCandidate(int row, int column, int value) {
+
+    }
+
+
+
+
     public SudokuBoard(int[][] game) {
         board = game;
         candidates = new int[9][9];
@@ -54,7 +66,7 @@ public class SudokuBoard {
             }
         }
 
-        printBoard();
+//        printBoard();
 //        printCandidates();
     }
 
