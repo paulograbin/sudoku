@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static com.paulograbin.sudoku.BoardRepository.*;
+import static com.paulograbin.sudoku.SudokuBoardAssert.assertThat;
 
 
 public class SodokuSolverIntegrationTests {
@@ -57,7 +58,7 @@ public class SodokuSolverIntegrationTests {
         var solver = new SudokuSolver(board);
         solver.solve();
 
-        Assertions.assertThat(board.isSolved()).isTrue();
+        assertThat(board).isSolved();
     }
 
     @Test
@@ -90,7 +91,7 @@ public class SodokuSolverIntegrationTests {
         var solver = new SudokuSolver(board);
         solver.solve();
 
-        Assertions.assertThat(board.isSolved()).isTrue();
+        assertThat(board).isSolved();
     }
 
     @Test
@@ -99,7 +100,7 @@ public class SodokuSolverIntegrationTests {
         var solver = new SudokuSolver(board);
         solver.solve();
 
-        Assertions.assertThat(board.isSolved()).isFalse();
+        assertThat(board).isNotSolved();
     }
 
     @Test
@@ -108,7 +109,7 @@ public class SodokuSolverIntegrationTests {
         var solver = new SudokuSolver(board);
         solver.solve();
 
-        Assertions.assertThat(board.isSolved()).isFalse();
+        assertThat(board).isNotSolved();
     }
 
     @Test
@@ -117,6 +118,6 @@ public class SodokuSolverIntegrationTests {
         var solver = new SudokuSolver(board);
         solver.solve();
 
-        Assertions.assertThat(board.isSolved()).isFalse();
+        assertThat(board).isNotSolved();
     }
 }
