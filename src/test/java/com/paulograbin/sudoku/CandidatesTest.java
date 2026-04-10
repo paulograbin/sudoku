@@ -118,6 +118,34 @@ class CandidatesTest {
     }
 
     @Test
+    void testRowNoCandidates() {
+        int[][] game = new int[][]{
+//               0, 1, 2,   3, 4, 5,   6, 7, 8
+                {9, 2, 3, 4, 5, 6, 7, 8, 1}, // 0
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}, // 1
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}, // 2
+
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}, // 3
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}, // 4
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}, // 5
+
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}, // 6
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}, // 7
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}  // 8
+        };
+
+        SudokuBoard board = new SudokuBoard(game);
+        for (int column = 0; column < 9; column++) {
+
+            int candidate = board.getCandidates(0, column);
+            int computedCandidates = board.computeCandidates(0, column);
+            assertThat(candidate).isEqualTo(computedCandidates);
+
+            CandidateValuesAssert.assertThat(candidate).hasValueAlreadySet__noCandidates();
+        }
+    }
+
+    @Test
     void testCellWithTwoCandidates() {
         int[][] game = new int[][]{
 //               0, 1, 2,   3, 4, 5,   6, 7, 8
