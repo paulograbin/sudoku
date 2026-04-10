@@ -42,6 +42,21 @@ class CandidatesTest {
     }
 
     @Test
+    void finishedBoard() {
+        SudokuBoard board = new SudokuBoard(BoardRepository.EASY_FIRST_SOLUTION);
+
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+                int candidates = board.getCandidates(row, column);
+                int computedCandidates = board.computeCandidates(row, column);
+                assertThat(computedCandidates).isEqualTo(candidates);
+
+                CandidateValuesAssert.assertThat(candidates).hasValueAlreadySet__noCandidates();
+            }
+        }
+    }
+
+    @Test
     void testCellWithSingleCandidate() {
         int[][] game = new int[][]{
 //               0, 1, 2,   3, 4, 5,   6, 7, 8
