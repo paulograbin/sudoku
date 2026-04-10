@@ -29,6 +29,16 @@ public class CandidateValuesAssert extends AbstractAssert<CandidateValuesAssert,
 
         return this;
     }
+
+    public CandidateValuesAssert hasValueAlreadySet__noCandidates() {
+        isNotNull();
+        if (Integer.bitCount(actual) != 0) {
+            failWithMessage("Expected cell to have no candidates value, but it has " + Integer.bitCount(actual));
+        }
+
+        return this;
+    }
+
     public CandidateValuesAssert hasCountOfCandidatesEqualTo(Integer expected) {
         isNotNull();
         if (Integer.bitCount(actual) != expected) {

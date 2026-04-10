@@ -13,7 +13,7 @@ class CandidatesTest {
     private static final int VALUE_1_BITMASK = 0b1;
 
     @Test
-    void basicTest__emptyBoard() {
+    void initialBoard() {
         int[][] game = new int[][]{
 //               0, 1, 2,   3, 4, 5,   6, 7, 8
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}, // 0
@@ -30,14 +30,15 @@ class CandidatesTest {
         };
 
         SudokuBoard board = new SudokuBoard(game);
-        int candidates = board.getCandidates(0, 0);
-        int computedCandidates = board.computeCandidates(0, 0);
-        assertThat(computedCandidates).isEqualTo(candidates);
 
-        CandidateValuesAssert.assertThat(candidates).hasCandidate(9);
-        CandidateValuesAssert.assertThat(candidates).hasCandidate(5);
-        CandidateValuesAssert.assertThat(candidates).hasCandidate(1);
-        assertThat(candidates).isEqualTo(ALL_VALUES_BITMASK);
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+                int candidates = board.getCandidates(row, column);
+                int computedCandidates = board.computeCandidates(row, column);
+                assertThat(computedCandidates).isEqualTo(candidates);
+                assertThat(candidates).isEqualTo(ALL_VALUES_BITMASK);
+            }
+        }
     }
 
     @Test
