@@ -11,7 +11,7 @@ public class SudokuBoard_getElementTest {
     private SudokuBoard board;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
         int[][] game = new int[][] {
 //               0, 1, 2,   3, 4, 5,   6, 7, 8
                 {0, 7, 8,   0, 3, 0,   6, 0, 0}, // 0
@@ -31,52 +31,52 @@ public class SudokuBoard_getElementTest {
     }
 
     @Test
-    public void testGetElementAt03() throws Exception {
-        assertEquals(board.getValueAt(0, 3), 0);
+    public void testGetElementAt03() {
+        assertEquals(0, board.getValueAt(0, 3));
     }
 
     @Test
-    public void testGetElementAt00() throws Exception {
-        assertEquals(board.getValueAt(0, 0), 0);
+    public void testGetElementAt00() {
+        assertEquals(0, board.getValueAt(0, 0));
     }
 
     @Test
-    public void testGetElementAt01() throws Exception {
-        assertEquals(board.getValueAt(0, 1), 7);
+    public void testGetElementAt01() {
+        assertEquals(7, board.getValueAt(0, 1));
     }
 
     @Test
-    public void testGetElementAt02() throws Exception {
-        assertEquals(board.getValueAt(0, 2), 8);
+    public void testGetElementAt02() {
+        assertEquals(8, board.getValueAt(0, 2));
     }
 
     @Test
-    public void testGetElementAt10() throws Exception {
-        assertEquals(board.getValueAt(1, 0), 0);
+    public void testGetElementAt10() {
+        assertEquals(0, board.getValueAt(1, 0));
     }
 
     @Test
-    public void testGetElementAt11() throws Exception {
-        assertEquals(board.getValueAt(1, 1), 0);
+    public void testGetElementAt11() {
+        assertEquals(0, board.getValueAt(1, 1));
     }
 
     @Test
-    public void testGetElementAt12() throws Exception {
-        assertEquals(board.getValueAt(1, 2), 3);
+    public void testGetElementAt12() {
+        assertEquals(3, board.getValueAt(1, 2));
     }
 
     @Test
-    public void testGetElementAt20() throws Exception {
-        assertEquals(board.getValueAt(2, 0), 0);
+    public void testGetElementAt20() {
+        assertEquals(0, board.getValueAt(2, 0));
     }
 
     @Test
-    public void testGetElementAt21() throws Exception {
-        assertEquals(board.getValueAt(2, 1), 9);
+    public void testGetElementAt21() {
+        assertEquals(9, board.getValueAt(2, 1));
     }
 
     @Test
-    public void testGetElementAt22() throws Exception {
-        assertEquals(board.getValueAt(2, 2), 0);
+    public void testGetElementAt22() {
+        assertEquals(0, board.getValueAt(2, 2));
     }
 }

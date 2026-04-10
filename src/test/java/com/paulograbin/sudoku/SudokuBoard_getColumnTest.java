@@ -15,7 +15,7 @@ public class SudokuBoard_getColumnTest {
     private final List<Integer> POSSIBILITIES = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
         int[][] game = new int[][] {
 //               0, 1, 2,   3, 4, 5,   6, 7, 8
                 {0, 0, 2,   0, 0, 0,   4, 6, 5}, // 0
