@@ -211,14 +211,9 @@ public class SudokuBoard {
                     System.out.print("| ");
                 }
 
-                System.out.print(candidates[i][j] == 0 ? ". " : Long.toBinaryString(candidates[i][j]) + "/" + (Integer.numberOfTrailingZeros(candidates[i][j]) + 1) + " ");
+                System.out.print(candidates[i][j] == 0 ? ". " : Long.toBinaryString(candidates[i][j]) + "/" + (Integer.bitCount(candidates[i][j]) + " "));
             }
             System.out.println();
         }
-    }
-
-    public void setValueAt(Integer value, int cellRow, int cellColumn) {
-        board[cellRow][cellColumn] = value;
-        candidates[cellRow][cellColumn] = 0;
     }
 }
