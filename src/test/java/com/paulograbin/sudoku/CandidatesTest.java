@@ -65,12 +65,14 @@ class CandidatesTest {
 
         CandidateValuesAssert.assertThat(candidate).hasOnlyOneCandidate();
         CandidateValuesAssert.assertThat(candidate).hasCandidate(9);
-        CandidateValuesAssert.assertThat(candidate).doesNotHaveCandidate(1);
-        CandidateValuesAssert.assertThat(candidate).doesNotHaveCandidate(2);
-        CandidateValuesAssert.assertThat(candidate).doesNotHaveCandidate(3);
-        CandidateValuesAssert.assertThat(candidate).doesNotHaveCandidate(4);
+        CandidateValuesAssert.assertThat(candidate)
+                .doesNotHaveCandidate(1)
+                .doesNotHaveCandidate(2)
+                .doesNotHaveCandidate(3)
+                .doesNotHaveCandidate(4);
         assertThat(candidate).isEqualTo(VALUE_9_BITMASK);
     }
+
     @Test
     void anotherTestCellWithSingleCandidate() {
         int[][] game = new int[][]{
@@ -95,10 +97,10 @@ class CandidatesTest {
 
         CandidateValuesAssert.assertThat(candidate).hasOnlyOneCandidate();
         CandidateValuesAssert.assertThat(candidate).hasCandidate(1);
-        CandidateValuesAssert.assertThat(candidate).doesNotHaveCandidate(9);
-        CandidateValuesAssert.assertThat(candidate).doesNotHaveCandidate(2);
-        CandidateValuesAssert.assertThat(candidate).doesNotHaveCandidate(3);
-        CandidateValuesAssert.assertThat(candidate).doesNotHaveCandidate(4);
+        CandidateValuesAssert.assertThat(candidate).doesNotHaveCandidate(9)
+                .doesNotHaveCandidate(2)
+                .doesNotHaveCandidate(3)
+                .doesNotHaveCandidate(4);
         assertThat(candidate).isEqualTo(VALUE_1_BITMASK);
     }
 
@@ -153,9 +155,8 @@ class CandidatesTest {
         assertThat(candidate).isEqualTo(computedCandidates);
 
         CandidateValuesAssert.assertThat(candidate).hasCountOfCandidatesEqualTo(2);
-        CandidateValuesAssert.assertThat(candidate).hasCandidate(9);
-        CandidateValuesAssert.assertThat(candidate).hasCandidate(1);
+        CandidateValuesAssert.assertThat(candidate).hasCandidate(9)
+                .hasCandidate(1);
         assertThat(candidate).isEqualTo(VALUES_1_AND_9_BITMASK);
     }
-
 }
