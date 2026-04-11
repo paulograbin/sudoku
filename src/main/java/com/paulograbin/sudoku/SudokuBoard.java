@@ -49,8 +49,20 @@ public class SudokuBoard {
         candidates[row][column] &= ~(1 << (value - 1));
     }
 
+    public void setValueAt(Integer value, int row, int column) {
+        IO.println("Set value " + value + " at row " + row + " column " + column);
 
+        board[row][column] = value;
+        candidates[row][column] = 0;
 
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                computeCandidatesInternal(i, j);
+            }
+        }
+
+//        printCandidates();
+    }
 
     public SudokuBoard(int[][] game) {
         board = game;
@@ -83,6 +95,26 @@ public class SudokuBoard {
 
     public int getValueAt(int row, int column) {
         return board[row][column];
+    }
+
+    private void computeCandidatesInternal(int row, int column) {
+        if (board[row][column] != 0) {
+            candidates[row][column] = 0;
+
+            return;
+        }
+
+        int newCandidates = candidates[row][column];
+
+        Set<Integer> alreadyFilledNumbers = new HashSet<>(getNumbersFromBlock(row, column));
+        alreadyFilledNumbers.addAll(getNumbersFromRow(row));
+        alreadyFilledNumbers.addAll(getNumbersFromColumn(column));
+
+        for (int v : alreadyFilledNumbers) {
+            newCandidates &= ~(1 << (v - 1));
+        }
+
+        candidates[row][column] = newCandidates;
     }
 
     public int computeCandidates(int row, int column) {
