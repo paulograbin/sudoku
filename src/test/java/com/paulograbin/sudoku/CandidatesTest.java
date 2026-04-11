@@ -27,6 +27,55 @@ class CandidatesTest {
     }
 
     @Test
+    void emptyBoard__afterStep() {
+        SudokuBoard board = new SudokuBoard(BoardRepository.EMPTY_BOARD);
+
+        board.setValueAt(1, 0, 0);
+        int firstCellCandidates = getBothCandidates(board, 0, 0);
+        CandidateValuesAssert.assertThat(firstCellCandidates).hasValueAlreadySet__noCandidates();
+        board.printBoard();
+        board.printCandidates();
+
+        int secondCell = getBothCandidates(board, 0, 1);
+        CandidateValuesAssert.assertThat(secondCell).doesNotHaveCandidate(1);
+//
+        int closeCell = getBothCandidates(board, 1, 0);
+        CandidateValuesAssert.assertThat(closeCell).doesNotHaveCandidate(1);
+
+        IO.println(" *************************************************** ");
+        IO.println(" *************************************************** ");
+        IO.println(" *************************************************** ");
+        IO.println(" *************************************************** ");
+
+        board.setValueAt(2, 0, 1);
+        int secondCellCandidates = getBothCandidates(board, 0, 1);
+        board.printBoard();
+        board.printCandidates();
+
+        IO.println(" *************************************************** ");
+        IO.println(" *************************************************** ");
+        IO.println(" *************************************************** ");
+        IO.println(" *************************************************** ");
+
+
+        board.setValueAt(3, 0, 2);
+        int thirdCellCandidates = getBothCandidates(board, 0, 2);
+        board.printBoard();
+        board.printCandidates();
+    }
+
+    private int getBothCandidates(SudokuBoard board, int row, int column) {
+        int candidates = board.getCandidates(row, column);
+        int computedCandidates = board.computeCandidates(row, column);
+
+        if (candidates != computedCandidates) {
+            IO.println("Fetched candidate and computed candidated are different!!!!" + candidates + " and " + computedCandidates);
+        }
+
+        return candidates;
+    }
+
+    @Test
     void finishedBoard() {
         SudokuBoard board = new SudokuBoard(BoardRepository.EASY_FIRST_SOLUTION);
 
@@ -130,6 +179,33 @@ class CandidatesTest {
 
             CandidateValuesAssert.assertThat(candidate).hasValueAlreadySet__noCandidates();
         }
+    }
+
+    @Test
+    void testSimpleBlock() {
+        int[][] game = new int[][]{
+//               0, 1, 2,   3, 4, 5,   6, 7, 8
+                {1, 2, 3, 0, 0, 0, 0, 0, 0}, // 0
+                {4, 0, 6, 0, 0, 0, 0, 0, 0}, // 1
+                {7, 8, 9, 0, 0, 0, 0, 0, 0}, // 2
+
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}, // 3
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}, // 4
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}, // 5
+
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}, // 6
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}, // 7
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}  // 8
+        };
+
+        SudokuBoard board = new SudokuBoard(game);
+
+        int candidate = board.getCandidates(1, 1);
+        int computedCandidates = board.computeCandidates(1, 1);
+        assertThat(candidate).isEqualTo(computedCandidates);
+
+        CandidateValuesAssert.assertThat(candidate).hasOnlyOneCandidate();
+        CandidateValuesAssert.assertThat(candidate).hasCandidate(5);
     }
 
     @Test
