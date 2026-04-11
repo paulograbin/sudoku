@@ -46,7 +46,7 @@ public class SudokuBoard {
     }
 
     void eliminateCandidate(int row, int column, int value) {
-
+        candidates[row][column] &= ~(1 << (value - 1));
     }
 
 
