@@ -22,7 +22,7 @@ public class NakedSinglesStrategy implements SolvingStrategy {
     }
 
     private boolean solveCell(SudokuBoard board, int row, int column) {
-        int candidates = board.computeCandidates(row, column);
+        int candidates = board.getCandidates(row, column);
 
 //        String bitmask = String.format("%9s", Integer.toBinaryString(candidates)).replace(' ', '0');
 

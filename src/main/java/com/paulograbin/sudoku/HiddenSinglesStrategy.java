@@ -41,7 +41,7 @@ public class HiddenSinglesStrategy implements SolvingStrategy {
             int lastCol = -1;
 
             for (int col = 0; col < 9; col++) {
-                int i = board.computeCandidates(row, col);
+                int i = board.getCandidates(row, col);
 
                 if (board.getValueAt(row, col) == 0 && isCandidate(i, candidate)) {
                     count++;

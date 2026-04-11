@@ -19,7 +19,7 @@ class CandidatesTest {
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
                 int candidates = board.getCandidates(row, column);
-                int computedCandidates = board.computeCandidates(row, column);
+                int computedCandidates = board.getCandidates(row, column);
                 assertThat(computedCandidates).isEqualTo(candidates);
                 assertThat(candidates).isEqualTo(ALL_VALUES_BITMASK);
             }
@@ -66,7 +66,7 @@ class CandidatesTest {
 
     private int getBothCandidates(SudokuBoard board, int row, int column) {
         int candidates = board.getCandidates(row, column);
-        int computedCandidates = board.computeCandidates(row, column);
+        int computedCandidates = board.getCandidates(row, column);
 
         if (candidates != computedCandidates) {
             IO.println("Fetched candidate and computed candidated are different!!!!" + candidates + " and " + computedCandidates);
@@ -82,7 +82,7 @@ class CandidatesTest {
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
                 int candidates = board.getCandidates(row, column);
-                int computedCandidates = board.computeCandidates(row, column);
+                int computedCandidates = board.getCandidates(row, column);
                 assertThat(computedCandidates).isEqualTo(candidates);
 
                 CandidateValuesAssert.assertThat(candidates).hasValueAlreadySet__noCandidates();
@@ -109,7 +109,7 @@ class CandidatesTest {
 
         SudokuBoard board = new SudokuBoard(game);
         int candidate = board.getCandidates(0, 0);
-        int computedCandidates = board.computeCandidates(0, 0);
+        int computedCandidates = board.getCandidates(0, 0);
         assertThat(candidate).isEqualTo(computedCandidates);
 
         CandidateValuesAssert.assertThat(candidate).hasOnlyOneCandidate();
@@ -141,7 +141,7 @@ class CandidatesTest {
 
         SudokuBoard board = new SudokuBoard(game);
         int candidate = board.getCandidates(0, 8);
-        int computedCandidates = board.computeCandidates(0, 8);
+        int computedCandidates = board.getCandidates(0, 8);
         assertThat(candidate).isEqualTo(computedCandidates);
 
         CandidateValuesAssert.assertThat(candidate).hasOnlyOneCandidate();
@@ -174,7 +174,7 @@ class CandidatesTest {
         for (int column = 0; column < 9; column++) {
 
             int candidate = board.getCandidates(0, column);
-            int computedCandidates = board.computeCandidates(0, column);
+            int computedCandidates = board.getCandidates(0, column);
             assertThat(candidate).isEqualTo(computedCandidates);
 
             CandidateValuesAssert.assertThat(candidate).hasValueAlreadySet__noCandidates();
@@ -201,7 +201,7 @@ class CandidatesTest {
         SudokuBoard board = new SudokuBoard(game);
 
         int candidate = board.getCandidates(1, 1);
-        int computedCandidates = board.computeCandidates(1, 1);
+        int computedCandidates = board.getCandidates(1, 1);
         assertThat(candidate).isEqualTo(computedCandidates);
 
         CandidateValuesAssert.assertThat(candidate).hasOnlyOneCandidate();
@@ -227,7 +227,7 @@ class CandidatesTest {
 
         SudokuBoard board = new SudokuBoard(game);
         int candidate = board.getCandidates(0, 0);
-        int computedCandidates = board.computeCandidates(0, 0);
+        int computedCandidates = board.getCandidates(0, 0);
         assertThat(candidate).isEqualTo(computedCandidates);
 
         CandidateValuesAssert.assertThat(candidate).hasCountOfCandidatesEqualTo(2);

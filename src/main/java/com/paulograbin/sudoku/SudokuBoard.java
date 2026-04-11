@@ -40,7 +40,6 @@ public class SudokuBoard {
     public static final List<Integer> POSSIBLE_VALUES = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
 
-
     int getCandidates(int row, int column) {
         return candidates[row][column];
     }
@@ -74,7 +73,7 @@ public class SudokuBoard {
 
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board.length; col++) {
-                computeCandidates(row, col);
+                computeCandidatesInternal(row, col);
             }
         }
 
@@ -100,7 +99,6 @@ public class SudokuBoard {
     private void computeCandidatesInternal(int row, int column) {
         if (board[row][column] != 0) {
             candidates[row][column] = 0;
-
             return;
         }
 
@@ -115,21 +113,6 @@ public class SudokuBoard {
         }
 
         candidates[row][column] = newCandidates;
-    }
-
-    public int computeCandidates(int row, int column) {
-        int allCandidates = 0b111111111;
-
-        Set<Integer> alreadyFilledNumbers = new HashSet<>(getNumbersFromBlock(row, column));
-        alreadyFilledNumbers.addAll(getNumbersFromRow(row));
-        alreadyFilledNumbers.addAll(getNumbersFromColumn(column));
-
-        for (int v : alreadyFilledNumbers) {
-            allCandidates &= ~(1 << (v - 1));
-        }
-
-        candidates[row][column] = allCandidates;
-        return allCandidates;
     }
 
     public Set<Integer> getNumbersFromRow(int row) {
