@@ -29,7 +29,7 @@ public class SodokuSolverIntegrationTests {
         };
 
         SudokuBoard board = new SudokuBoard(game);
-        board.printCandidates();
+        board.printCandidatesBoard();
         var solver = new SudokuSolver(board);
         solver.solve();
 
@@ -54,7 +54,7 @@ public class SodokuSolverIntegrationTests {
                 {2, 8, 3,   4, 1, 5,   9, 7, 6}  // 8
             };
         SudokuBoard board = new SudokuBoard(game);
-        board.printCandidates();
+        board.printCandidatesBoard();
         var solver = new SudokuSolver(board);
         solver.solve();
 

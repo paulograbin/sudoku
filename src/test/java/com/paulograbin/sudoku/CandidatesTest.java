@@ -34,7 +34,7 @@ class CandidatesTest {
         int firstCellCandidates = getBothCandidates(board, 0, 0);
         CandidateValuesAssert.assertThat(firstCellCandidates).hasValueAlreadySet__noCandidates();
         board.printBoard();
-        board.printCandidates();
+//        board.printCandidatesText();
 
         int secondCell = getBothCandidates(board, 0, 1);
         CandidateValuesAssert.assertThat(secondCell).doesNotHaveCandidate(1);
@@ -50,7 +50,7 @@ class CandidatesTest {
         board.setValueAt(2, 0, 1);
         int secondCellCandidates = getBothCandidates(board, 0, 1);
         board.printBoard();
-        board.printCandidates();
+//        board.printCandidatesText();
 
         IO.println(" *************************************************** ");
         IO.println(" *************************************************** ");
@@ -61,7 +61,7 @@ class CandidatesTest {
         board.setValueAt(3, 0, 2);
         int thirdCellCandidates = getBothCandidates(board, 0, 2);
         board.printBoard();
-        board.printCandidates();
+//        board.printCandidatesText();
     }
 
     private int getBothCandidates(SudokuBoard board, int row, int column) {

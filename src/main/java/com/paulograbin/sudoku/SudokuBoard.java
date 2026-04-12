@@ -183,7 +183,7 @@ public class SudokuBoard {
         }
     }
 
-    public void printCandidates() {
+    public void printCandidatesBoard() {
         for (int i = 0; i < 9; i++) {
             if (i % 3 == 0 && i > 0) {
                 System.out.println("------+-------+------");
@@ -197,6 +197,17 @@ public class SudokuBoard {
                 System.out.print(candidates[i][j] == 0 ? ". " : Long.toBinaryString(candidates[i][j]) + "/" + (Integer.bitCount(candidates[i][j]) + " "));
             }
             System.out.println();
+        }
+    }
+
+    public void printCandidatesText() {
+        for (int i = 0; i < 9; i++) {
+
+            for (int j = 0; j < 9; j++) {
+                var text = String.format("Cell [%s][%s] has bitmask %s, and %s candidates", i, j, Long.toBinaryString(candidates[i][j]), Integer.bitCount(candidates[i][j]));
+
+                IO.println(text);
+            }
         }
     }
 }
