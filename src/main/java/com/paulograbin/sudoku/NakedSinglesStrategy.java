@@ -1,5 +1,8 @@
 package com.paulograbin.sudoku;
 
+import static com.paulograbin.sudoku.CandidateHelper.doesCellHaveOnlyASingleCandidate;
+import static com.paulograbin.sudoku.CandidateHelper.makeValueFromSingleCandidate;
+
 public class NakedSinglesStrategy implements SolvingStrategy {
 
     @Override
@@ -26,8 +29,8 @@ public class NakedSinglesStrategy implements SolvingStrategy {
 
 //        String bitmask = String.format("%9s", Integer.toBinaryString(candidates)).replace(' ', '0');
 
-        if (Integer.bitCount(candidates) == 1) {
-            int value = Integer.numberOfTrailingZeros(candidates) + 1;
+        if (doesCellHaveOnlyASingleCandidate(candidates)) {
+            int value = makeValueFromSingleCandidate(candidates);
             board.setValueAt(value, row, column);
 
 //            System.out.println("Found value for row: " + row + " column: " + column + " are: " + bitmask + "/" + Integer.toBinaryString(candidates) + ", value " + (Integer.numberOfTrailingZeros(candidates) + 1));

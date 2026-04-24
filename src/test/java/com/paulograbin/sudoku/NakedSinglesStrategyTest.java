@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.paulograbin.sudoku.BoardRepository.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.paulograbin.sudoku.SudokuBoardAssert.assertThat;
 
 
 public class NakedSinglesStrategyTest {
@@ -24,7 +24,18 @@ public class NakedSinglesStrategyTest {
             }
         }
 
-        assertThat(board.isSolved()).isTrue();
+        assertThat(board).isSolved();
+        boardHasNoCandidates(board);
+    }
+
+    private void boardHasNoCandidates(SudokuBoard board) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board.getCandidates(i, j) != 0) {
+                    Assertions.fail("Should have no candidates");
+                }
+            }
+        }
     }
 
     @Test
@@ -38,7 +49,7 @@ public class NakedSinglesStrategyTest {
         }
 
         board.printBoard();
-        assertThat(board.isSolved()).isFalse();
+        assertThat(board).isNotSolved();
     }
 
     @Test
@@ -52,6 +63,6 @@ public class NakedSinglesStrategyTest {
         }
 
         board.printBoard();
-        assertThat(board.isSolved()).isFalse();
+        assertThat(board).isNotSolved();
     }
 }
