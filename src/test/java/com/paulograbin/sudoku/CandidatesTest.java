@@ -2,6 +2,8 @@ package com.paulograbin.sudoku;
 
 import org.junit.jupiter.api.Test;
 
+import static com.paulograbin.sudoku.BoardRepository.makeEasyGame__firstSolution;
+import static com.paulograbin.sudoku.BoardRepository.makeEmptyBoard;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -14,7 +16,7 @@ class CandidatesTest {
 
     @Test
     void emptyBoard() {
-        SudokuBoard board = new SudokuBoard(BoardRepository.EMPTY_BOARD);
+        SudokuBoard board = new SudokuBoard(makeEmptyBoard());
 
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
@@ -28,7 +30,7 @@ class CandidatesTest {
 
     @Test
     void emptyBoard__afterStep() {
-        SudokuBoard board = new SudokuBoard(BoardRepository.EMPTY_BOARD);
+        SudokuBoard board = new SudokuBoard(makeEmptyBoard());
 
         board.setValueAt(1, 0, 0);
         int firstCellCandidates = getBothCandidates(board, 0, 0);
@@ -77,7 +79,7 @@ class CandidatesTest {
 
     @Test
     void finishedBoard() {
-        SudokuBoard board = new SudokuBoard(BoardRepository.EASY_FIRST_SOLUTION);
+        SudokuBoard board = new SudokuBoard(makeEasyGame__firstSolution());
 
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {

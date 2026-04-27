@@ -104,7 +104,7 @@ public class HiddenSinglesStrategyTest {
 
     @Test
     void test() {
-        SudokuBoard board = new SudokuBoard(EASY_GAME);
+        SudokuBoard board = new SudokuBoard(makeEasyBoard());
 
         while (!board.isSolved()) {
             boolean apply = strategy.apply(board);
@@ -119,7 +119,7 @@ public class HiddenSinglesStrategyTest {
 
     @Test
     void hard() {
-        SudokuBoard board = new SudokuBoard(HARD_GAME);
+        SudokuBoard board = new SudokuBoard(makeHardBoard());
 
         boolean keepGoing = true;
 
@@ -133,7 +133,7 @@ public class HiddenSinglesStrategyTest {
 
     @Test
     void nightmare() {
-        SudokuBoard board = new SudokuBoard(NIGHTMARE_GAME);
+        SudokuBoard board = new SudokuBoard(makeNightMareGame());
 
         boolean keepGoing = true;
 

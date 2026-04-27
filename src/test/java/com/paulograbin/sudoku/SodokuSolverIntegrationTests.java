@@ -87,7 +87,7 @@ public class SodokuSolverIntegrationTests {
 
     @Test
     public void easy() {
-        SudokuBoard board = new SudokuBoard(EASY_GAME);
+        SudokuBoard board = new SudokuBoard(makeEasyBoard());
         var solver = new SudokuSolver(board);
         solver.solve();
 
@@ -96,7 +96,7 @@ public class SodokuSolverIntegrationTests {
 
     @Test
     public void anotherEasy() {
-        SudokuBoard board = new SudokuBoard(EASY_FIRST_GAME);
+        SudokuBoard board = new SudokuBoard(makeEasyGame__firstBoard());
         var solver = new SudokuSolver(board);
         solver.solve();
 
@@ -105,7 +105,7 @@ public class SodokuSolverIntegrationTests {
 
     @Test
     public void hard() {
-        SudokuBoard board = new SudokuBoard(HARD_GAME);
+        SudokuBoard board = new SudokuBoard(makeHardBoard());
         var solver = new SudokuSolver(board);
         solver.solve();
 
@@ -114,7 +114,7 @@ public class SodokuSolverIntegrationTests {
 
     @Test
     public void nightmare() {
-        SudokuBoard board = new SudokuBoard(NIGHTMARE_GAME);
+        SudokuBoard board = new SudokuBoard(makeNightMareGame());
         var solver = new SudokuSolver(board);
         solver.solve();
 
