@@ -64,7 +64,10 @@ public class SudokuBoard {
     }
 
     public SudokuBoard(int[][] game) {
-        board = game;
+        board = new int[9][9];
+        for (int i = 0; i < 9; i++) {
+            board[i] = game[i].clone();
+        }
         candidates = new int[9][9];
 
         for (int[] candidate : candidates) {
