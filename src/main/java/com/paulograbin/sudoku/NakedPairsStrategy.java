@@ -4,7 +4,6 @@ import static com.paulograbin.sudoku.CandidateHelper.makeCandidateString;
 
 public class NakedPairsStrategy implements SolvingStrategy {
 
-
     private SudokuBoard board;
 
     @Override
@@ -18,13 +17,10 @@ public class NakedPairsStrategy implements SolvingStrategy {
         System.out.println("Doing rows...");
 
         for (int row = 0; row < 9; row++) { // each row
-//            System.out.println("Working on row " + row);
-
             for (int i = 0; i < 8; i++) { // start with left most cell, then compare with the next one
                 for (int j = i + 1; j < 9; j++) { // fetch the next ones
                     int candidatesForFirstCell = board.getCandidates(row, i);
                     int candidatesForSecondCell = board.getCandidates(row, j);
-
 
                     if (Integer.bitCount(candidatesForFirstCell) == 2 && Integer.bitCount(candidatesForSecondCell) == 2 && candidatesForFirstCell == candidatesForSecondCell) {
                         System.out.printf("Found the same two candidates %s at At %d/%d and %d/%d%n", Integer.toBinaryString(candidatesForFirstCell), row, i, row, j);
@@ -52,15 +48,13 @@ public class NakedPairsStrategy implements SolvingStrategy {
                                 }
                             }
                         }
+
                     }
                 }
-
-//                System.out.println("New row");
             }
         }
 
         var columnMadeProgress = workOnColumns();
-
 
         return rowMadeProgress || columnMadeProgress;
     }
