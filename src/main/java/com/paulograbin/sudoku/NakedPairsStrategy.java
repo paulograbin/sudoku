@@ -99,7 +99,15 @@ public class NakedPairsStrategy implements SolvingStrategy {
 
                                     board.eliminateCandidate(k, column, firstvalue);
                                     madeProgress = true;
+                                }
 
+                                int candidates = board.getCandidates(k, column);
+                                if (CandidateHelper.doesCellHaveOnlyASingleCandidate(candidates)) {
+                                    System.out.println("Cell is left with a single candidate, let's set the value");
+
+                                    int valueToSet = CandidateHelper.makeValueFromSingleCandidate(candidates);
+
+                                    board.setValueAt(valueToSet, k, column);
                                 }
 
                                 if (board.containsCandidate(k, column, secondValue)) {

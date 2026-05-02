@@ -38,27 +38,26 @@ class NakedPairsStrategyTest {
     void easyGame__columns__oneStep() {
         SudokuBoard board = new SudokuBoard(makeEasyBoard());
         int[] candidateColumnBefore = board.getCandidateColumn(3);
-        System.out.println(Arrays.toString(candidateColumnBefore));
+//        System.out.println(Arrays.toString(candidateColumnBefore));
 
-        for (int i = 0; i < candidateColumnBefore.length; i++) {
-            int j = candidateColumnBefore[i];
-            if (j > 0)
-                System.out.print(i + ": "+ CandidateHelper.makeCandidateString(j).trim() + ", ");
-        }
+//        for (int i = 0; i < candidateColumnBefore.length; i++) {
+//            int j = candidateColumnBefore[i];
+//            if (j > 0)
+//                System.out.print(i + ": "+ CandidateHelper.makeCandidateString(j).trim() + ", ");
+//        }
 
         Assertions.assertThat(candidateColumnBefore).containsExactly(0, 130, 0, 0, 258, 258, 0, 160, 0);
 
         boolean apply = strategy.apply(board);
 
         int[] candidateColumn = board.getCandidateColumn(3);
-        for (int i = 0; i < candidateColumn.length; i++) {
-            int j = candidateColumn[i];
-            if (j > 0)
-                System.out.print(i + ": "+ CandidateHelper.makeCandidateString(j).trim() + ", ");
-        }
+//        for (int i = 0; i < candidateColumn.length; i++) {
+//            int j = candidateColumn[i];
+//            if (j > 0)
+//                System.out.print(i + ": "+ CandidateHelper.makeCandidateString(j).trim() + ", ");
+//        }
 
-        Assertions.assertThat(candidateColumn).containsExactly(0b000000000, 0b010000000, 0b000000000, 0b000000000, 0b100000010, 0b100000010, 0b000000000, 0b010100000, 0b000000000);
-
+        Assertions.assertThat(candidateColumn).containsExactly(0, 0, 0, 0b000000000, 0b100000010, 0b100000010, 0b000000000, 0b000100000, 0b000000000);
         Assertions.assertThat(apply).isTrue();
     }
 
