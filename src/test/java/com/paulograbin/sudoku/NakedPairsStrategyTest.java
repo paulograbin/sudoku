@@ -32,10 +32,6 @@ class NakedPairsStrategyTest {
         Assertions.assertThat(candidateRow).containsExactly(0b000000000, 0b000001000, 0b000000100, 0b100000010, 5, 0b000000000, 0b100000010, 0b000000000, 0b000100001);
 
         Assertions.assertThat(apply).isTrue();
-
-        strategy.apply(board);
-
-        board.printCandidatesBoard();
     }
 
     @Test

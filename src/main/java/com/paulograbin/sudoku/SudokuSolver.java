@@ -21,8 +21,6 @@ public class SudokuSolver {
             boolean madeProgress = false;
 
             for (SolvingStrategy strategy : strategies) {
-
-
                 if (strategy.apply(board)) {
                     madeProgress = true;
                     break;
