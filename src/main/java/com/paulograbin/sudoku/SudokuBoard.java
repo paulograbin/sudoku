@@ -189,15 +189,45 @@ public class SudokuBoard {
     public void printCandidatesBoard() {
         for (int i = 0; i < 9; i++) {
             if (i % 3 == 0 && i > 0) {
-                System.out.println("------+-------+------");
+                System.out.println("------------------------+-------------------------+------------------------");
             }
 
             for (int j = 0; j < 9; j++) {
-                if (j % 3 == 0 && j != 0) {
-                    System.out.print("| ");
+//                if (j % 3 == 0 && j != 0) {
+                System.out.print("| ");
+//                }
+
+                String a = CandidateHelper.makeCandidateString(candidates[i][j]);
+
+//                System.out.print(candidates[i][j] == 0 ? "000000000/0 " : Long.toBinaryString(candidates[i][j]) + "/" + (Integer.bitCount(candidates[i][j]) + " "));
+                System.out.print(a + " ");
+            }
+            System.out.println();
+        }
+    }
+
+
+    public void onePrintToRuleThemAll() {
+        for (int i = 0; i < 9; i++) {
+            if (i % 3 == 0 && i > 0) {
+                System.out.println("------------------------+-------------------------+------------------------");
+            }
+
+            for (int j = 0; j < 9; j++) {
+//                if (j % 3 == 0 && j != 0) {
+                System.out.print("| ");
+//                }
+
+                String a = "";
+
+                if (getValueAt(i, j) > 0) {
+                    a = "    " + getValueAt(i, j) + "    ";
+                } else {
+                    a = CandidateHelper.makeCandidateString(candidates[i][j]);
                 }
 
-                System.out.print(candidates[i][j] == 0 ? ". " : Long.toBinaryString(candidates[i][j]) + "/" + (Integer.bitCount(candidates[i][j]) + " "));
+//                System.out.print(candidates[i][j] == 0 ? "000000000/0 " : Long.toBinaryString(candidates[i][j]) + "/" + (Integer.bitCount(candidates[i][j]) + " "));
+                System.out.print(a + " ");
             }
             System.out.println();
         }
