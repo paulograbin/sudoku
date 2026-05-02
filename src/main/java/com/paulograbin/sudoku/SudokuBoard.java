@@ -100,7 +100,7 @@ public class SudokuBoard {
     }
 
     private void computeCandidatesInternal(int row, int column) {
-        if (board[row][column] != 0) {
+        if (getValueAt(row, column) != 0) {
             candidates[row][column] = 0;
             return;
         }
