@@ -37,7 +37,6 @@ public class SodokuSolverIntegrationTests {
     }
 
     @Test
-    @Disabled
     public void solvedBoard() {
          int[][] game = new int[][] {
         //               0, 1, 2,   3, 4, 5,   6, 7, 8
@@ -53,12 +52,14 @@ public class SodokuSolverIntegrationTests {
                 {6, 5, 7,   2, 3, 9,   1, 4, 8}, // 7
                 {2, 8, 3,   4, 1, 5,   9, 7, 6}  // 8
             };
+
+
         SudokuBoard board = new SudokuBoard(game);
-        board.printCandidatesBoard();
         var solver = new SudokuSolver(board);
         solver.solve();
 
         assertThat(board).isSolved();
+        boardHasNoCandidates(board);
     }
 
     @Test
