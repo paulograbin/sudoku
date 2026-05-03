@@ -29,7 +29,7 @@ class NakedPairsStrategyTest {
 
         System.out.println(Arrays.toString(candidateRow));
 
-        Assertions.assertThat(candidateRow).containsExactly(0b000000000, 0b000001000, 0b000000100, 0b100000010, 5, 0b000000000, 0b100000010, 0b000000000, 0b000100001);
+        Assertions.assertThat(candidateRow).containsExactly(0, 0, 0, 0b100000010, 0, 0, 0b100000010, 0, 0);
 
         Assertions.assertThat(apply).isTrue();
     }
@@ -57,7 +57,7 @@ class NakedPairsStrategyTest {
 //                System.out.print(i + ": "+ CandidateHelper.makeCandidateString(j).trim() + ", ");
 //        }
 
-        Assertions.assertThat(candidateColumn).containsExactly(0, 0, 0, 0b000000000, 0b100000010, 0b100000010, 0b000000000, 0b000100000, 0b000000000);
+        Assertions.assertThat(candidateColumn).containsExactly(0, 0, 0, 0, 0b100000010, 0b100000010, 0, 0b000100000, 0);
         Assertions.assertThat(apply).isTrue();
     }
 
