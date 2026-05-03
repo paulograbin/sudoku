@@ -27,8 +27,6 @@ public class HiddenSinglesStrategy implements SolvingStrategy {
     }
 
     private boolean scanRow(SudokuBoard board, int row) {
-        System.out.println("Scanning row: " + row);
-
         boolean madeProgress = false;
 
         for (int candidate : POSSIBLE_VALUES) {
@@ -51,7 +49,7 @@ public class HiddenSinglesStrategy implements SolvingStrategy {
 
             if (count == 1) {
                 board.setValueAt(candidate, row, lastCol);
-                System.out.println("Add value " + candidate + " to row " + row + " column " + lastCol);
+                System.out.println("Set value " + candidate + " to row " + row + " column " + lastCol);
                 board.printBoard();
                 madeProgress = true;
             }
@@ -65,7 +63,6 @@ public class HiddenSinglesStrategy implements SolvingStrategy {
     }
 
     private boolean scanColumn(SudokuBoard board, int col) {
-        System.out.println("Scanning column: " + col);
         boolean madeProgress = false;
 
         for (int candidate : POSSIBLE_VALUES) {
@@ -130,19 +127,19 @@ public class HiddenSinglesStrategy implements SolvingStrategy {
     }
 
     private boolean rowContains(SudokuBoard board, int row, int value) {
-        System.out.println("Checking row contains " + value + " in row " + row);
+//        System.out.println("Checking row contains " + value + " in row " + row);
 
         return board.getNumbersFromRow(row).contains(value);
     }
 
     private boolean columnContains(SudokuBoard board, int col, int value) {
-        System.out.println("Checking column contains " + value + " in column " + col);
+//        System.out.println("Checking column contains " + value + " in column " + col);
 
         return board.getNumbersFromColumn(col).contains(value);
     }
 
     private boolean blockContains(SudokuBoard board, int row, int col, int value) {
-        System.out.println("Checking block contains " + value + " in row " + row + " column " + col);
+//        System.out.println("Checking block contains " + value + " in row " + row + " column " + col);
 
         return board.getNumbersFromBlock(row, col).contains(value);
     }
