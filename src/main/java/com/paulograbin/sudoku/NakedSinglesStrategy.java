@@ -31,8 +31,6 @@ public class NakedSinglesStrategy implements SolvingStrategy {
             int value = makeValueFromSingleCandidate(candidates);
             board.setValueAt(value, row, column);
 
-            System.out.println("Found value for " + row + "/" + column + " is " + value);
-
             return true;
         }
 

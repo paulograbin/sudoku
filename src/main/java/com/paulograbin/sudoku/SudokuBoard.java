@@ -45,7 +45,25 @@ public class SudokuBoard {
     }
 
     void eliminateCandidate(int row, int column, int value) {
-        candidates[row][column] &= ~(1 << (value - 1));
+        var oldValue = candidates[row][column];
+        var newValue = candidates[row][column];
+
+        if (oldValue == 0) {
+            // This means cell already has a value set
+            return;
+        }
+
+        newValue &= ~(1 << (value - 1));
+
+        candidates[row][column] = newValue;
+
+//        System.out.printf("Valor era %s e agora é %s \n", oldValue, newValue);
+    }
+
+    public boolean containsCandidate(int row, int column, int value) {
+        int candidatesForCell = candidates[row][column];
+
+        return (candidatesForCell & (1 << (value - 1))) != 0;
     }
 
     public void setValueAt(Integer value, int row, int column) {
@@ -225,9 +243,6 @@ public class SudokuBoard {
         int count = 0;
 
         for (int i = 0; i < 9; i++) {
-
-                IO.println(text);
-            }
             numbersInColumn[count] = candidates[i][columnId];
             count++;
         }
