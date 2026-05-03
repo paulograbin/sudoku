@@ -80,7 +80,7 @@ public class NakedPairsStrategy implements SolvingStrategy {
                         aux &= aux - 1;
                         int secondValue = Integer.numberOfTrailingZeros(aux) + 1;
 
-                        System.out.println("Now we check every other cell than these two, and remove those candidates from them");
+                        System.out.println("Now we check every cell in the column other than these two, and remove those candidates from them");
                         for (int k = 0; k < 9; k++) {
 
                             if (k != i && k != j) {
@@ -101,6 +101,13 @@ public class NakedPairsStrategy implements SolvingStrategy {
                                     madeProgress = true;
                                 }
 
+                                if (board.containsCandidate(k, column, secondValue)) {
+                                    System.out.printf("Cell is %d / %d has candidate (%s) value %s, removing it \n", k, column, CandidateHelper.makeCandidateString(board.getCandidates(k, column)), secondValue);
+
+                                    board.eliminateCandidate(k, column, secondValue);
+                                    madeProgress = true;
+                                }
+
                                 int candidates = board.getCandidates(k, column);
                                 if (CandidateHelper.doesCellHaveOnlyASingleCandidate(candidates)) {
                                     System.out.println("Cell is left with a single candidate, let's set the value");
@@ -110,13 +117,6 @@ public class NakedPairsStrategy implements SolvingStrategy {
                                     board.setValueAt(valueToSet, k, column);
                                 }
 
-                                if (board.containsCandidate(k, column, secondValue)) {
-                                    System.out.printf("Cell is %d / %d has candidate (%s) value %s, removing it \n", k, column, CandidateHelper.makeCandidateString(board.getCandidates(k, column)), secondValue);
-
-                                    board.eliminateCandidate(k, column, secondValue);
-                                    madeProgress = true;
-                                }
-
                             } else {
                                 System.out.printf("Skipping cell is %d / %d because it has a naked pair \n", k, column);
                             }
@@ -124,8 +124,6 @@ public class NakedPairsStrategy implements SolvingStrategy {
                     }
                 }
             }
-
-            System.out.println();
         }
 
         return madeProgress;
