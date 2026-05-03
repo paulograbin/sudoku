@@ -186,27 +186,6 @@ public class SudokuBoard {
         }
     }
 
-    public void printCandidatesBoard() {
-        for (int i = 0; i < 9; i++) {
-            if (i % 3 == 0 && i > 0) {
-                System.out.println("------------------------+-------------------------+------------------------");
-            }
-
-            for (int j = 0; j < 9; j++) {
-//                if (j % 3 == 0 && j != 0) {
-                System.out.print("| ");
-//                }
-
-                String a = CandidateHelper.makeCandidateString(candidates[i][j]);
-
-//                System.out.print(candidates[i][j] == 0 ? "000000000/0 " : Long.toBinaryString(candidates[i][j]) + "/" + (Integer.bitCount(candidates[i][j]) + " "));
-                System.out.print(a + " ");
-            }
-            System.out.println();
-        }
-    }
-
-
     public void onePrintToRuleThemAll() {
         for (int i = 0; i < 9; i++) {
             if (i % 3 == 0 && i > 0) {
@@ -233,14 +212,26 @@ public class SudokuBoard {
         }
     }
 
-    public void printCandidatesText() {
-        for (int i = 0; i < 9; i++) {
+    public int[] getRow(int r) {
+        return board[r];
+    }
 
-            for (int j = 0; j < 9; j++) {
-                var text = String.format("Cell [%s][%s] has bitmask %s, and %s candidates", i, j, Long.toBinaryString(candidates[i][j]), Integer.bitCount(candidates[i][j]));
+    public int[] getCandidateRow(int i) {
+        return candidates[i];
+    }
+
+    public int[] getCandidateColumn(int columnId) {
+        var numbersInColumn = new int[9];
+        int count = 0;
+
+        for (int i = 0; i < 9; i++) {
 
                 IO.println(text);
             }
+            numbersInColumn[count] = candidates[i][columnId];
+            count++;
         }
+
+        return numbersInColumn;
     }
 }
