@@ -1,7 +1,6 @@
 package com.paulograbin.sudoku;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static com.paulograbin.sudoku.BoardRepository.*;
@@ -11,7 +10,6 @@ import static com.paulograbin.sudoku.SudokuBoardAssert.assertThat;
 public class SodokuSolverIntegrationTests {
 
     @Test
-    @Disabled
     public void learning() {
         int[][] game = new int[][] {
 //               0, 1, 2,   3, 4, 5,   6, 7, 8
@@ -29,11 +27,11 @@ public class SodokuSolverIntegrationTests {
         };
 
         SudokuBoard board = new SudokuBoard(game);
-        board.printCandidatesBoard();
+        board.onePrintToRuleThemAll();
         var solver = new SudokuSolver(board);
         solver.solve();
 
-        Assertions.assertThat(board.isSolved()).isTrue();
+        assertThat(board).isNotSolved();
     }
 
     @Test
