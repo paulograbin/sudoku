@@ -27,18 +27,13 @@ public class NakedSinglesStrategy implements SolvingStrategy {
     private boolean solveCell(SudokuBoard board, int row, int column) {
         int candidates = board.getCandidates(row, column);
 
-//        String bitmask = String.format("%9s", Integer.toBinaryString(candidates)).replace(' ', '0');
-
         if (doesCellHaveOnlyASingleCandidate(candidates)) {
             int value = makeValueFromSingleCandidate(candidates);
             board.setValueAt(value, row, column);
 
-//            System.out.println("Found value for row: " + row + " column: " + column + " are: " + bitmask + "/" + Integer.toBinaryString(candidates) + ", value " + (Integer.numberOfTrailingZeros(candidates) + 1));
-            System.out.println("Found value for row: " + row + " column: " + column + " are: " + Integer.toBinaryString(candidates) + ", value " + (Integer.numberOfTrailingZeros(candidates) + 1));
+            System.out.println("Found value for " + row + "/" + column + " is " + value);
 
             return true;
-        } else {
-            System.out.println(Integer.bitCount(candidates) + " candidates found for row: " + row + " column: " + column + ": from bitmask " + Integer.toBinaryString(candidates));
         }
 
         return false;

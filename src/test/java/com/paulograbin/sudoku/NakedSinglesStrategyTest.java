@@ -48,7 +48,7 @@ public class NakedSinglesStrategyTest {
             keepGoing = strategy.apply(board);
         }
 
-        board.printBoard();
+        board.onePrintToRuleThemAll();
         assertThat(board).isNotSolved();
     }
 

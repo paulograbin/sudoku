@@ -1,7 +1,5 @@
 package com.paulograbin.sudoku;
 
-import java.util.IllegalFormatCodePointException;
-
 public class CandidateHelper {
 
     public static boolean doesCellHaveOnlyASingleCandidate(int bitmask) {
@@ -43,4 +41,7 @@ public class CandidateHelper {
         return a.toString();
     }
 
+    public static String makeBinaryString(int candidates) {
+        return Integer.toBinaryString(candidates);
+    }
 }
