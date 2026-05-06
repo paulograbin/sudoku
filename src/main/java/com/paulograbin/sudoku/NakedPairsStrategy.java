@@ -17,35 +17,51 @@ public class NakedPairsStrategy implements SolvingStrategy {
         System.out.println("Doing rows...");
 
         for (int row = 0; row < 9; row++) { // each row
-            for (int i = 0; i < 8; i++) { // start with left most cell, then compare with the next one
-                for (int j = i + 1; j < 9; j++) { // fetch the next ones
-                    int candidatesForFirstCell = board.getCandidates(row, i);
-                    int candidatesForSecondCell = board.getCandidates(row, j);
+            for (int comparisonRoot = 0; comparisonRoot < 8; comparisonRoot++) { // start with left most cell, then compare with the next one
+                for (int comparisonNext = comparisonRoot + 1; comparisonNext < 9; comparisonNext++) { // fetch the next ones
+                    int candidatesForFirstCell = board.getCandidates(row, comparisonRoot);
+                    int candidatesForSecondCell = board.getCandidates(row, comparisonNext);
 
                     if (Integer.bitCount(candidatesForFirstCell) == 2 && Integer.bitCount(candidatesForSecondCell) == 2 && candidatesForFirstCell == candidatesForSecondCell) {
-                        System.out.printf("Found the same two candidates %s at At %d/%d and %d/%d%n", Integer.toBinaryString(candidatesForFirstCell), row, i, row, j);
+                        System.out.printf("Found the same two candidates %s at At %d/%d and %d/%d%n", CandidateHelper.makeCandidateString(candidatesForFirstCell), row, comparisonRoot, row, comparisonNext);
 
                         int firstvalue = Integer.numberOfTrailingZeros(candidatesForFirstCell) + 1;
                         candidatesForFirstCell &= candidatesForFirstCell - 1;
                         int secondValue = Integer.numberOfTrailingZeros(candidatesForFirstCell) + 1;
 
-                        for (int k = 0; k < 9; k++) {
-                            if (k != i && k != j) {
-                                if (board.getValueAt(row, k) != 0) {
+                        System.out.println("Now we check every cell in the row other than these two, and remove those candidates from them");
+
+                        for (int otherComparison = 0; otherComparison < 9; otherComparison++) {
+                            if (otherComparison != comparisonRoot && otherComparison != comparisonNext) {
+                                if (board.getValueAt(row, otherComparison) != 0) {
+                                    System.out.printf("Cell is %d / %d is already set with value %d, skipping it \n", row, otherComparison, board.getValueAt(row, otherComparison));
                                     continue;
                                 }
 
-                                if (board.containsCandidate(row, k, firstvalue)) {
-                                    board.eliminateCandidate(row, k, firstvalue);
+                                if (board.containsCandidate(row, otherComparison, firstvalue)) {
+                                    System.out.printf("Cell is %d / %d has candidate (%s) value %s, removing it \n", row, otherComparison, CandidateHelper.makeCandidateString(board.getCandidates(row, otherComparison)), firstvalue);
+
+                                    board.eliminateCandidate(row, otherComparison, firstvalue);
                                     rowMadeProgress = true;
-                                    System.out.printf("Eliminating value %s from cell %s/%s \n", firstvalue, row, k);
                                 }
 
-                                if (board.containsCandidate(row, k, secondValue)) {
-                                    board.eliminateCandidate(row, k, secondValue);
+                                if (board.containsCandidate(row, otherComparison, secondValue)) {
+                                    System.out.printf("Cell is %d / %d has candidate (%s) value %s, removing it \n", row, otherComparison, CandidateHelper.makeCandidateString(board.getCandidates(row, otherComparison)), secondValue);
+
+                                    board.eliminateCandidate(row, otherComparison, secondValue);
                                     rowMadeProgress = true;
-                                    System.out.printf("Eliminating values %s from cell %s/%s \n", secondValue, row, k);
                                 }
+
+                                int candidates = board.getCandidates(row, otherComparison);
+                                if (CandidateHelper.doesCellHaveOnlyASingleCandidate(candidates)) {
+                                    System.out.println("Cell is left with a single candidate, let's set the value!!!!!!!!!!!!!");
+
+                                    int valueToSet = CandidateHelper.makeValueFromSingleCandidate(candidates);
+
+                                    board.setValueAt(valueToSet, row, otherComparison);
+                                }
+                            } else {
+                                System.out.printf("Skipping cell is %d / %d because it has a naked pair \n", row, otherComparison);
                             }
                         }
 
