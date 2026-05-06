@@ -91,6 +91,17 @@ public class SodokuSolverIntegrationTests {
         solver.solve();
 
         assertThat(board).isSolved();
+        boardHasNoCandidates(board);
+    }
+
+    private void boardHasNoCandidates(SudokuBoard board) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board.getCandidates(i, j) != 0) {
+                    Assertions.fail("Should have no candidates");
+                }
+            }
+        }
     }
 
     @Test
@@ -100,11 +111,14 @@ public class SodokuSolverIntegrationTests {
         solver.solve();
 
         assertThat(board).isNotSolved();
+        board.onePrintToRuleThemAll();
     }
 
     @Test
     public void hard() {
         SudokuBoard board = new SudokuBoard(makeHardBoard());
+        board.onePrintToRuleThemAll();
+
         var solver = new SudokuSolver(board);
         solver.solve();
 
