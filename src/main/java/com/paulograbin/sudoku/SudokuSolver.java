@@ -8,6 +8,9 @@ public class SudokuSolver {
     private final List<SolvingStrategy> strategies = List.of(
             new NakedSinglesStrategy(),
             new HiddenSinglesStrategy(),
+            new NakedPairsStrategy(),
+            new NakedSinglesStrategy(),
+            new HiddenSinglesStrategy(),
             new NakedPairsStrategy()
     );
 
@@ -31,6 +34,8 @@ public class SudokuSolver {
                 System.out.println(" ================== ");
                 System.out.println(" NO STRATEGY COULD MAKE PROGRESS ");
                 board.printBoard();
+                System.out.println(" ================== ");
+                board.onePrintToRuleThemAll();
                 return;
             }
         }

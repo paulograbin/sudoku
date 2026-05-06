@@ -59,6 +59,8 @@ class NakedPairsStrategyTest {
 
         Assertions.assertThat(candidateColumn).containsExactly(0, 0, 0, 0, 0b100000010, 0b100000010, 0, 0b000100000, 0);
         Assertions.assertThat(apply).isTrue();
+
+        board.onePrintToRuleThemAll();
     }
 
 
