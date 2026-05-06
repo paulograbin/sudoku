@@ -1,4 +1,4 @@
-# Sudoku Solver - Conversation Notes (2026-04-05)
+# Sudoku Solver - Conversation Notes (updated 2026-05-05)
 
 ## Codebase Overview
 - Java project with a strategy-pattern Sudoku solver
@@ -11,13 +11,15 @@
 2. **HiddenSinglesStrategy** - scans rows/columns/blocks for values that can only go in one cell
 
 ### Current state
-- Solves easy puzzles
-- Stalls on hard/nightmare puzzles (tests assert `isSolved().isFalse()`)
+- Solves easy puzzles fully
+- Hard puzzle gets partially solved (strategies run out before completion — needs more advanced techniques)
+- Nightmare puzzle also stalls (expected)
 
-## Issues found
-1. `EXTREME_GAME` and `EASY_FIRST_GAME` in BoardRepository have duplicate 9 in row 6 (columns 2 and 5) - invalid boards
-2. `printCandidates` line 170 had operator precedence bug (parentheses needed around `numberOfTrailingZeros + 1`)
-3. Candidates aren't recomputed for peers after placing a value (strategies call `computeCandidates` on-demand)
+## Issues found & fixed
+1. ~~`EXTREME_GAME` and `EASY_FIRST_GAME` in BoardRepository have duplicate 9 in row 6 (columns 2 and 5) - invalid boards~~ ✅ Fixed
+2. ~~`printCandidates` line 170 had operator precedence bug (parentheses needed around `numberOfTrailingZeros + 1`)~~ ✅ Fixed
+3. ~~Candidates aren't recomputed for peers after placing a value~~ ✅ Fixed — `setValueAt` now recomputes all candidates
+4. ~~`makeHardBoard()` had duplicate 4 in block (3,3): cells (4,3) and (5,5) both had value 4~~ ✅ Fixed — removed 4 from (4,3)
 
 ## Bitmask Operations Reference
 ```java
@@ -51,56 +53,27 @@ while (temp != 0) {
 }
 ```
 
-## Next Strategy: Naked Pairs
+## Implemented: Naked Pairs ✅
 
-### What it does
-If two cells in the same row/column/block have the exact same two candidates (e.g., {3,7}), those values must go in those two cells. Eliminate those values from all other cells in that unit.
+Implemented for rows and columns. Finds cells with identical 2-candidate bitmasks and eliminates those values from peers. Also sets values directly when elimination leaves a cell with a single candidate.
 
-### Bitmask check
-```java
-candidates[a] == candidates[b] && Integer.bitCount(candidates[a]) == 2
-// Eliminate from other cells:
-otherCell &= ~pairMask;
-```
+**Current gap:** Not yet implemented for blocks (3x3 boxes). Adding block-level naked pairs may help solve more of the hard puzzle.
 
-### Implementation plan
-1. **Add to SudokuBoard:**
-   - `getCandidates(row, col)` - returns current bitmask
-   - `eliminateCandidate(row, col, value)` - clears a specific bit, returns true if changed
-
-2. **Create `NakedPairsStrategy` implementing `SolvingStrategy`:**
-   - For each unit (row, column, block):
-     - Collect empty cells and their candidate bitmasks
-     - Find pairs where `candidates[a] == candidates[b]` and `bitCount == 2`
-     - Eliminate both pair values from all other empty cells in the unit
-   - Returns true if any candidate was eliminated
-
-3. **Register in SudokuSolver:** Add after HiddenSinglesStrategy in the strategies list
-
-4. **Add unit test** in `NakedPairsStrategyTest`
-
-### Key design detail
-Naked Pairs doesn't place values directly — it only eliminates candidates. This means the solver loop must recognize candidate elimination as "progress" so it re-runs Naked/Hidden Singles afterward. The strategy's `apply()` returns `true` when any candidate was eliminated, which the existing solver loop already handles correctly (it restarts from the first strategy on any progress).
-
-### Files to modify
-- `src/main/java/com/paulograbin/sudoku/SudokuBoard.java` — add `getCandidates()` and `eliminateCandidate()`
-- `src/main/java/com/paulograbin/sudoku/SudokuSolver.java` — add NakedPairsStrategy to strategy list
-- **New:** `src/main/java/com/paulograbin/sudoku/NakedPairsStrategy.java`
-- **New:** `src/test/java/com/paulograbin/sudoku/NakedPairsStrategyTest.java`
-
-### Verification
-- `mvn test` — all existing tests should pass
-- Hard/anotherEasy tests may solve further if naked pairs was the missing technique
-
-### Strategy progression (future)
+### Strategy progression
 1. Naked Singles ✅
 2. Hidden Singles ✅
-3. Naked Pairs ← next
-4. Pointing Pairs / Box-Line Reduction
+3. Naked Pairs ✅ (rows & columns — blocks still TODO)
+4. Pointing Pairs / Box-Line Reduction ← next
 5. Naked Triples
 6. Hidden Pairs/Triples
 7. X-Wing
 8. Backtracking (catch-all)
 
+## Next steps
+1. **Naked Pairs for blocks** — extend `NakedPairsStrategy` to also scan 3x3 boxes
+2. **Pointing Pairs / Box-Line Reduction** — if a candidate in a block is confined to one row/column, eliminate it from the rest of that row/column
+3. **Board validation** — detect invalid initial boards (duplicate values in row/column/block) before solving, and detect zero-candidate cells during solving to report unsolvable state early
+4. **Hard puzzle goal** — the hard board (now fixed) still has unsolved cells after all current strategies run; next strategies should close the gap
+
 ## Status
-Plan was reviewed and ready to implement. Implementation has not started yet.
+All tests passing (6/6). Hard board data fixed. Naked Pairs implemented for rows/columns.
