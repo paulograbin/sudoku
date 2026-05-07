@@ -16,63 +16,74 @@ public class NakedPairsStrategy implements SolvingStrategy {
 
         System.out.println("Doing rows...");
 
-        for (int row = 0; row < 9; row++) { // each row
-            for (int comparisonRoot = 0; comparisonRoot < 8; comparisonRoot++) { // start with left most cell, then compare with the next one
-                for (int comparisonNext = comparisonRoot + 1; comparisonNext < 9; comparisonNext++) { // fetch the next ones
-                    int candidatesForFirstCell = board.getCandidates(row, comparisonRoot);
-                    int candidatesForSecondCell = board.getCandidates(row, comparisonNext);
+//        for (int row = 0; row < 9; row++) { // each row
+//            for (int comparisonRoot = 0; comparisonRoot < 8; comparisonRoot++) { // start with left most cell, then compare with the next one
+//                for (int comparisonNext = comparisonRoot + 1; comparisonNext < 9; comparisonNext++) { // fetch the next ones
+//                    int candidatesForFirstCell = board.getCandidates(row, comparisonRoot);
+//                    int candidatesForSecondCell = board.getCandidates(row, comparisonNext);
+//
+//                    if (Integer.bitCount(candidatesForFirstCell) == 2 && Integer.bitCount(candidatesForSecondCell) == 2 && candidatesForFirstCell == candidatesForSecondCell) {
+//                        System.out.printf("Found the same two candidates %s at At %d/%d and %d/%d%n", CandidateHelper.makeCandidateString(candidatesForFirstCell), row, comparisonRoot, row, comparisonNext);
+//
+//                        int firstvalue = Integer.numberOfTrailingZeros(candidatesForFirstCell) + 1;
+//                        candidatesForFirstCell &= candidatesForFirstCell - 1;
+//                        int secondValue = Integer.numberOfTrailingZeros(candidatesForFirstCell) + 1;
+//
+//                        System.out.println("Now we check every cell in the row other than these two, and remove those candidates from them");
+//
+//                        for (int otherComparison = 0; otherComparison < 9; otherComparison++) {
+//                            if (otherComparison != comparisonRoot && otherComparison != comparisonNext) {
+//                                if (board.getValueAt(row, otherComparison) != 0) {
+//                                    System.out.printf("Cell is %d / %d is already set with value %d, skipping it \n", row, otherComparison, board.getValueAt(row, otherComparison));
+//                                    continue;
+//                                }
+//
+//                                if (board.containsCandidate(row, otherComparison, firstvalue)) {
+//                                    System.out.printf("Cell is %d / %d has candidate (%s) value %s, removing it \n", row, otherComparison, CandidateHelper.makeCandidateString(board.getCandidates(row, otherComparison)), firstvalue);
+//
+//                                    board.eliminateCandidate(row, otherComparison, firstvalue);
+//                                    rowMadeProgress = true;
+//                                }
+//
+//                                if (board.containsCandidate(row, otherComparison, secondValue)) {
+//                                    System.out.printf("Cell is %d / %d has candidate (%s) value %s, removing it \n", row, otherComparison, CandidateHelper.makeCandidateString(board.getCandidates(row, otherComparison)), secondValue);
+//
+//                                    board.eliminateCandidate(row, otherComparison, secondValue);
+//                                    rowMadeProgress = true;
+//                                }
+//
+//                                int candidates = board.getCandidates(row, otherComparison);
+//                                if (CandidateHelper.doesCellHaveOnlyASingleCandidate(candidates)) {
+//                                    System.out.println("Cell is left with a single candidate, let's set the value!!!!!!!!!!!!!");
+//
+//                                    int valueToSet = CandidateHelper.makeValueFromSingleCandidate(candidates);
+//
+//                                    board.setValueAt(valueToSet, row, otherComparison);
+//                                }
+//                            } else {
+//                                System.out.printf("Skipping cell is %d / %d because it has a naked pair \n", row, otherComparison);
+//                            }
+//                        }
+//
+//                    }
+//                }
+//            }
+//        }
 
-                    if (Integer.bitCount(candidatesForFirstCell) == 2 && Integer.bitCount(candidatesForSecondCell) == 2 && candidatesForFirstCell == candidatesForSecondCell) {
-                        System.out.printf("Found the same two candidates %s at At %d/%d and %d/%d%n", CandidateHelper.makeCandidateString(candidatesForFirstCell), row, comparisonRoot, row, comparisonNext);
+//        var columnMadeProgress = workOnColumns();
+        var columnMadeProgress = false;
+//
+        var blockProgress = workOnBlocks();
 
-                        int firstvalue = Integer.numberOfTrailingZeros(candidatesForFirstCell) + 1;
-                        candidatesForFirstCell &= candidatesForFirstCell - 1;
-                        int secondValue = Integer.numberOfTrailingZeros(candidatesForFirstCell) + 1;
+        return rowMadeProgress || columnMadeProgress || blockProgress;
+    }
 
-                        System.out.println("Now we check every cell in the row other than these two, and remove those candidates from them");
-
-                        for (int otherComparison = 0; otherComparison < 9; otherComparison++) {
-                            if (otherComparison != comparisonRoot && otherComparison != comparisonNext) {
-                                if (board.getValueAt(row, otherComparison) != 0) {
-                                    System.out.printf("Cell is %d / %d is already set with value %d, skipping it \n", row, otherComparison, board.getValueAt(row, otherComparison));
-                                    continue;
-                                }
-
-                                if (board.containsCandidate(row, otherComparison, firstvalue)) {
-                                    System.out.printf("Cell is %d / %d has candidate (%s) value %s, removing it \n", row, otherComparison, CandidateHelper.makeCandidateString(board.getCandidates(row, otherComparison)), firstvalue);
-
-                                    board.eliminateCandidate(row, otherComparison, firstvalue);
-                                    rowMadeProgress = true;
-                                }
-
-                                if (board.containsCandidate(row, otherComparison, secondValue)) {
-                                    System.out.printf("Cell is %d / %d has candidate (%s) value %s, removing it \n", row, otherComparison, CandidateHelper.makeCandidateString(board.getCandidates(row, otherComparison)), secondValue);
-
-                                    board.eliminateCandidate(row, otherComparison, secondValue);
-                                    rowMadeProgress = true;
-                                }
-
-                                int candidates = board.getCandidates(row, otherComparison);
-                                if (CandidateHelper.doesCellHaveOnlyASingleCandidate(candidates)) {
-                                    System.out.println("Cell is left with a single candidate, let's set the value!!!!!!!!!!!!!");
-
-                                    int valueToSet = CandidateHelper.makeValueFromSingleCandidate(candidates);
-
-                                    board.setValueAt(valueToSet, row, otherComparison);
-                                }
-                            } else {
-                                System.out.printf("Skipping cell is %d / %d because it has a naked pair \n", row, otherComparison);
-                            }
-                        }
-
-                    }
-                }
-            }
+    private boolean workOnBlocks() {
+        for (int block = 0; block < 9; block++) {
+            System.out.println("Working on block " + block);
         }
 
-        var columnMadeProgress = workOnColumns();
-
-        return rowMadeProgress || columnMadeProgress;
+        return false;
     }
 
     private boolean workOnColumns() {

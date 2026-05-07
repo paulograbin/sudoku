@@ -15,6 +15,8 @@ class NakedPairsStrategyTest {
     private final SolvingStrategy strategy = new NakedPairsStrategy();
 
 
+
+
     @Test
     void easyGame__oneStep() {
         SudokuBoard board = new SudokuBoard(makeEasyBoard());
@@ -65,7 +67,36 @@ class NakedPairsStrategyTest {
 
 
     @Test
-    @Disabled
+    void startBlock() {
+        SudokuBoard board = new SudokuBoard(makeEasyBoard());
+        int[] candidateColumnBefore = board.getCandidateColumn(3);
+//        System.out.println(Arrays.toString(candidateColumnBefore));
+
+//        for (int i = 0; i < candidateColumnBefore.length; i++) {
+//            int j = candidateColumnBefore[i];
+//            if (j > 0)
+//                System.out.print(i + ": "+ CandidateHelper.makeCandidateString(j).trim() + ", ");
+//        }
+
+        Assertions.assertThat(candidateColumnBefore).containsExactly(0, 130, 0, 0, 258, 258, 0, 160, 0);
+
+        boolean apply = strategy.apply(board);
+
+        int[] candidateColumn = board.getCandidateColumn(3);
+//        for (int i = 0; i < candidateColumn.length; i++) {
+//            int j = candidateColumn[i];
+//            if (j > 0)
+//                System.out.print(i + ": "+ CandidateHelper.makeCandidateString(j).trim() + ", ");
+//        }
+
+        Assertions.assertThat(candidateColumn).containsExactly(0, 0, 0, 0, 0b100000010, 0b100000010, 0, 0b000100000, 0);
+        Assertions.assertThat(apply).isTrue();
+
+        board.onePrintToRuleThemAll();
+    }
+
+
+    @Test
     void easy() {
         SudokuBoard board = new SudokuBoard(makeEasyBoard());
 
