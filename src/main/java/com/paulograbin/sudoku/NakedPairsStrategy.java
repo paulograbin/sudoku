@@ -79,8 +79,18 @@ public class NakedPairsStrategy implements SolvingStrategy {
     }
 
     private boolean workOnBlocks() {
-        for (int block = 0; block < 9; block++) {
-            System.out.println("Working on block " + block);
+        board.printBoard();
+
+        for (int blockRow = 0; blockRow < 9; blockRow += 3) {
+            for (int blockCol = 0; blockCol < 9; blockCol += 3) {
+
+                for (int r = blockRow; r < blockRow + 3; r++) {
+                    for (int c = blockCol; c < blockCol + 3; c++) {
+
+
+                    }
+                }
+            }
         }
 
         return false;
